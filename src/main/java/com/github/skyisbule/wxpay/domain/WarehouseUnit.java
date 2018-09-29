@@ -33,6 +33,8 @@ public class WarehouseUnit implements Serializable {
      */
     private String supportingFacilities;
 
+    private Integer warehouseId;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getWuid() {
@@ -83,6 +85,14 @@ public class WarehouseUnit implements Serializable {
         this.supportingFacilities = supportingFacilities;
     }
 
+    public Integer getWarehouseId() {
+        return warehouseId;
+    }
+
+    public void setWarehouseId(Integer warehouseId) {
+        this.warehouseId = warehouseId;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -100,7 +110,8 @@ public class WarehouseUnit implements Serializable {
             && (this.getCouldSublet() == null ? other.getCouldSublet() == null : this.getCouldSublet().equals(other.getCouldSublet()))
             && (this.getMinSubletArea() == null ? other.getMinSubletArea() == null : this.getMinSubletArea().equals(other.getMinSubletArea()))
             && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
-            && (this.getSupportingFacilities() == null ? other.getSupportingFacilities() == null : this.getSupportingFacilities().equals(other.getSupportingFacilities()));
+            && (this.getSupportingFacilities() == null ? other.getSupportingFacilities() == null : this.getSupportingFacilities().equals(other.getSupportingFacilities()))
+            && (this.getWarehouseId() == null ? other.getWarehouseId() == null : this.getWarehouseId().equals(other.getWarehouseId()));
     }
 
     @Override
@@ -113,6 +124,7 @@ public class WarehouseUnit implements Serializable {
         result = prime * result + ((getMinSubletArea() == null) ? 0 : getMinSubletArea().hashCode());
         result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
         result = prime * result + ((getSupportingFacilities() == null) ? 0 : getSupportingFacilities().hashCode());
+        result = prime * result + ((getWarehouseId() == null) ? 0 : getWarehouseId().hashCode());
         return result;
     }
 
@@ -128,6 +140,7 @@ public class WarehouseUnit implements Serializable {
         sb.append(", minSubletArea=").append(minSubletArea);
         sb.append(", price=").append(price);
         sb.append(", supportingFacilities=").append(supportingFacilities);
+        sb.append(", warehouseId=").append(warehouseId);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

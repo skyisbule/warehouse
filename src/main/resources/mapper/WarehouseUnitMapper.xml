@@ -8,6 +8,7 @@
     <result column="min_sublet_area" jdbcType="INTEGER" property="minSubletArea" />
     <result column="price" jdbcType="INTEGER" property="price" />
     <result column="supporting_facilities" jdbcType="VARCHAR" property="supportingFacilities" />
+    <result column="warehouse_id" jdbcType="INTEGER" property="warehouseId" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -68,7 +69,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    wuid, area, could_sublet, min_sublet_area, price, supporting_facilities
+    wuid, area, could_sublet, min_sublet_area, price, supporting_facilities, warehouse_id
   </sql>
   <select id="selectByExample" parameterType="com.github.skyisbule.wxpay.domain.WarehouseUnitExample" resultMap="BaseResultMap">
     select
@@ -110,11 +111,11 @@
   </delete>
   <insert id="insert" parameterType="com.github.skyisbule.wxpay.domain.WarehouseUnit">
     insert into db_warehouse_unit (wuid, area, could_sublet, 
-      min_sublet_area, price, supporting_facilities
-      )
+      min_sublet_area, price, supporting_facilities, 
+      warehouse_id)
     values (#{wuid,jdbcType=INTEGER}, #{area,jdbcType=INTEGER}, #{couldSublet,jdbcType=INTEGER}, 
-      #{minSubletArea,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{supportingFacilities,jdbcType=VARCHAR}
-      )
+      #{minSubletArea,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{supportingFacilities,jdbcType=VARCHAR}, 
+      #{warehouseId,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.github.skyisbule.wxpay.domain.WarehouseUnit">
     insert into db_warehouse_unit
@@ -137,6 +138,9 @@
       <if test="supportingFacilities != null">
         supporting_facilities,
       </if>
+      <if test="warehouseId != null">
+        warehouse_id,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="wuid != null">
@@ -156,6 +160,9 @@
       </if>
       <if test="supportingFacilities != null">
         #{supportingFacilities,jdbcType=VARCHAR},
+      </if>
+      <if test="warehouseId != null">
+        #{warehouseId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -186,6 +193,9 @@
       <if test="record.supportingFacilities != null">
         supporting_facilities = #{record.supportingFacilities,jdbcType=VARCHAR},
       </if>
+      <if test="record.warehouseId != null">
+        warehouse_id = #{record.warehouseId,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -198,7 +208,8 @@
       could_sublet = #{record.couldSublet,jdbcType=INTEGER},
       min_sublet_area = #{record.minSubletArea,jdbcType=INTEGER},
       price = #{record.price,jdbcType=INTEGER},
-      supporting_facilities = #{record.supportingFacilities,jdbcType=VARCHAR}
+      supporting_facilities = #{record.supportingFacilities,jdbcType=VARCHAR},
+      warehouse_id = #{record.warehouseId,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -221,6 +232,9 @@
       <if test="supportingFacilities != null">
         supporting_facilities = #{supportingFacilities,jdbcType=VARCHAR},
       </if>
+      <if test="warehouseId != null">
+        warehouse_id = #{warehouseId,jdbcType=INTEGER},
+      </if>
     </set>
     where wuid = #{wuid,jdbcType=INTEGER}
   </update>
@@ -230,7 +244,8 @@
       could_sublet = #{couldSublet,jdbcType=INTEGER},
       min_sublet_area = #{minSubletArea,jdbcType=INTEGER},
       price = #{price,jdbcType=INTEGER},
-      supporting_facilities = #{supportingFacilities,jdbcType=VARCHAR}
+      supporting_facilities = #{supportingFacilities,jdbcType=VARCHAR},
+      warehouse_id = #{warehouseId,jdbcType=INTEGER}
     where wuid = #{wuid,jdbcType=INTEGER}
   </update>
 </mapper>

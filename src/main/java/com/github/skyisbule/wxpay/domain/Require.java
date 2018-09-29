@@ -62,7 +62,7 @@ public class Require implements Serializable {
     /**
      * 0、未审核 1、已经通过审核 3、订单已完成 4、订单已取消
      */
-    private String status;
+    private Integer status;
 
     /**
      * 发布者id
@@ -159,11 +159,11 @@ public class Require implements Serializable {
         this.remark = remark;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 

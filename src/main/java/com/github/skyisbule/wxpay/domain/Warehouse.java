@@ -19,11 +19,6 @@ public class Warehouse implements Serializable {
     private String picture;
 
     /**
-     * 以、分割
-     */
-    private Integer unitIds;
-
-    /**
      * 园区的服务
      */
     private String parkService;
@@ -56,7 +51,7 @@ public class Warehouse implements Serializable {
     /**
      * 0、未审核 1、已经通过审核 3、订单已完成 4、订单已取消
      */
-    private String status;
+    private Integer status;
 
     private static final long serialVersionUID = 1L;
 
@@ -82,14 +77,6 @@ public class Warehouse implements Serializable {
 
     public void setPicture(String picture) {
         this.picture = picture;
-    }
-
-    public Integer getUnitIds() {
-        return unitIds;
-    }
-
-    public void setUnitIds(Integer unitIds) {
-        this.unitIds = unitIds;
     }
 
     public String getParkService() {
@@ -140,11 +127,11 @@ public class Warehouse implements Serializable {
         this.remark = remark;
     }
 
-    public String getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -163,7 +150,6 @@ public class Warehouse implements Serializable {
         return (this.getWid() == null ? other.getWid() == null : this.getWid().equals(other.getWid()))
             && (this.getLocate() == null ? other.getLocate() == null : this.getLocate().equals(other.getLocate()))
             && (this.getPicture() == null ? other.getPicture() == null : this.getPicture().equals(other.getPicture()))
-            && (this.getUnitIds() == null ? other.getUnitIds() == null : this.getUnitIds().equals(other.getUnitIds()))
             && (this.getParkService() == null ? other.getParkService() == null : this.getParkService().equals(other.getParkService()))
             && (this.getSuitableFor() == null ? other.getSuitableFor() == null : this.getSuitableFor().equals(other.getSuitableFor()))
             && (this.getIsPass() == null ? other.getIsPass() == null : this.getIsPass().equals(other.getIsPass()))
@@ -180,7 +166,6 @@ public class Warehouse implements Serializable {
         result = prime * result + ((getWid() == null) ? 0 : getWid().hashCode());
         result = prime * result + ((getLocate() == null) ? 0 : getLocate().hashCode());
         result = prime * result + ((getPicture() == null) ? 0 : getPicture().hashCode());
-        result = prime * result + ((getUnitIds() == null) ? 0 : getUnitIds().hashCode());
         result = prime * result + ((getParkService() == null) ? 0 : getParkService().hashCode());
         result = prime * result + ((getSuitableFor() == null) ? 0 : getSuitableFor().hashCode());
         result = prime * result + ((getIsPass() == null) ? 0 : getIsPass().hashCode());
@@ -200,7 +185,6 @@ public class Warehouse implements Serializable {
         sb.append(", wid=").append(wid);
         sb.append(", locate=").append(locate);
         sb.append(", picture=").append(picture);
-        sb.append(", unitIds=").append(unitIds);
         sb.append(", parkService=").append(parkService);
         sb.append(", suitableFor=").append(suitableFor);
         sb.append(", isPass=").append(isPass);
