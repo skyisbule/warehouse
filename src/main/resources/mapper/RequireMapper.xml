@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.skyisbule.wxpay.dao.RequireMapper">
+  <resultMap id="BaseResultMap" type="com.github.skyisbule.wxpay.domain.Require">
+    <id column="rid" jdbcType="INTEGER" property="rid" />
+    <result column="locates" jdbcType="VARCHAR" property="locates" />
+    <result column="area" jdbcType="INTEGER" property="area" />
+    <result column="purpose" jdbcType="VARCHAR" property="purpose" />
+    <result column="fire_control_require" jdbcType="VARCHAR" property="fireControlRequire" />
+    <result column="platform_require" jdbcType="VARCHAR" property="platformRequire" />
+    <result column="floor_require" jdbcType="VARCHAR" property="floorRequire" />
+    <result column="require_time" jdbcType="TIMESTAMP" property="requireTime" />
+    <result column="lease_term" jdbcType="VARCHAR" property="leaseTerm" />
+    <result column="max_price" jdbcType="INTEGER" property="maxPrice" />
+    <result column="remark" jdbcType="VARCHAR" property="remark" />
+    <result column="status" jdbcType="VARCHAR" property="status" />
+    <result column="open_id" jdbcType="VARCHAR" property="openId" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    rid, locates, area, purpose, fire_control_require, platform_require, floor_require, 
+    require_time, lease_term, max_price, remark, status, open_id
+  </sql>
+  <select id="selectByExample" parameterType="com.github.skyisbule.wxpay.domain.RequireExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from db_require
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from db_require
+    where rid = #{rid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from db_require
+    where rid = #{rid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.github.skyisbule.wxpay.domain.RequireExample">
+    delete from db_require
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.github.skyisbule.wxpay.domain.Require">
+    insert into db_require (rid, locates, area, 
+      purpose, fire_control_require, platform_require, 
+      floor_require, require_time, lease_term, 
+      max_price, remark, status, 
+      open_id)
+    values (#{rid,jdbcType=INTEGER}, #{locates,jdbcType=VARCHAR}, #{area,jdbcType=INTEGER}, 
+      #{purpose,jdbcType=VARCHAR}, #{fireControlRequire,jdbcType=VARCHAR}, #{platformRequire,jdbcType=VARCHAR}, 
+      #{floorRequire,jdbcType=VARCHAR}, #{requireTime,jdbcType=TIMESTAMP}, #{leaseTerm,jdbcType=VARCHAR}, 
+      #{maxPrice,jdbcType=INTEGER}, #{remark,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, 
+      #{openId,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.skyisbule.wxpay.domain.Require">
+    insert into db_require
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        rid,
+      </if>
+      <if test="locates != null">
+        locates,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="purpose != null">
+        purpose,
+      </if>
+      <if test="fireControlRequire != null">
+        fire_control_require,
+      </if>
+      <if test="platformRequire != null">
+        platform_require,
+      </if>
+      <if test="floorRequire != null">
+        floor_require,
+      </if>
+      <if test="requireTime != null">
+        require_time,
+      </if>
+      <if test="leaseTerm != null">
+        lease_term,
+      </if>
+      <if test="maxPrice != null">
+        max_price,
+      </if>
+      <if test="remark != null">
+        remark,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="openId != null">
+        open_id,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="rid != null">
+        #{rid,jdbcType=INTEGER},
+      </if>
+      <if test="locates != null">
+        #{locates,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=INTEGER},
+      </if>
+      <if test="purpose != null">
+        #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="fireControlRequire != null">
+        #{fireControlRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="platformRequire != null">
+        #{platformRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="floorRequire != null">
+        #{floorRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="requireTime != null">
+        #{requireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaseTerm != null">
+        #{leaseTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="maxPrice != null">
+        #{maxPrice,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        #{openId,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.github.skyisbule.wxpay.domain.RequireExample" resultType="java.lang.Long">
+    select count(*) from db_require
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update db_require
+    <set>
+      <if test="record.rid != null">
+        rid = #{record.rid,jdbcType=INTEGER},
+      </if>
+      <if test="record.locates != null">
+        locates = #{record.locates,jdbcType=VARCHAR},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=INTEGER},
+      </if>
+      <if test="record.purpose != null">
+        purpose = #{record.purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fireControlRequire != null">
+        fire_control_require = #{record.fireControlRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="record.platformRequire != null">
+        platform_require = #{record.platformRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="record.floorRequire != null">
+        floor_require = #{record.floorRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="record.requireTime != null">
+        require_time = #{record.requireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.leaseTerm != null">
+        lease_term = #{record.leaseTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="record.maxPrice != null">
+        max_price = #{record.maxPrice,jdbcType=INTEGER},
+      </if>
+      <if test="record.remark != null">
+        remark = #{record.remark,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.openId != null">
+        open_id = #{record.openId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update db_require
+    set rid = #{record.rid,jdbcType=INTEGER},
+      locates = #{record.locates,jdbcType=VARCHAR},
+      area = #{record.area,jdbcType=INTEGER},
+      purpose = #{record.purpose,jdbcType=VARCHAR},
+      fire_control_require = #{record.fireControlRequire,jdbcType=VARCHAR},
+      platform_require = #{record.platformRequire,jdbcType=VARCHAR},
+      floor_require = #{record.floorRequire,jdbcType=VARCHAR},
+      require_time = #{record.requireTime,jdbcType=TIMESTAMP},
+      lease_term = #{record.leaseTerm,jdbcType=VARCHAR},
+      max_price = #{record.maxPrice,jdbcType=INTEGER},
+      remark = #{record.remark,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=VARCHAR},
+      open_id = #{record.openId,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.skyisbule.wxpay.domain.Require">
+    update db_require
+    <set>
+      <if test="locates != null">
+        locates = #{locates,jdbcType=VARCHAR},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=INTEGER},
+      </if>
+      <if test="purpose != null">
+        purpose = #{purpose,jdbcType=VARCHAR},
+      </if>
+      <if test="fireControlRequire != null">
+        fire_control_require = #{fireControlRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="platformRequire != null">
+        platform_require = #{platformRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="floorRequire != null">
+        floor_require = #{floorRequire,jdbcType=VARCHAR},
+      </if>
+      <if test="requireTime != null">
+        require_time = #{requireTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="leaseTerm != null">
+        lease_term = #{leaseTerm,jdbcType=VARCHAR},
+      </if>
+      <if test="maxPrice != null">
+        max_price = #{maxPrice,jdbcType=INTEGER},
+      </if>
+      <if test="remark != null">
+        remark = #{remark,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="openId != null">
+        open_id = #{openId,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.skyisbule.wxpay.domain.Require">
+    update db_require
+    set locates = #{locates,jdbcType=VARCHAR},
+      area = #{area,jdbcType=INTEGER},
+      purpose = #{purpose,jdbcType=VARCHAR},
+      fire_control_require = #{fireControlRequire,jdbcType=VARCHAR},
+      platform_require = #{platformRequire,jdbcType=VARCHAR},
+      floor_require = #{floorRequire,jdbcType=VARCHAR},
+      require_time = #{requireTime,jdbcType=TIMESTAMP},
+      lease_term = #{leaseTerm,jdbcType=VARCHAR},
+      max_price = #{maxPrice,jdbcType=INTEGER},
+      remark = #{remark,jdbcType=VARCHAR},
+      status = #{status,jdbcType=VARCHAR},
+      open_id = #{openId,jdbcType=VARCHAR}
+    where rid = #{rid,jdbcType=INTEGER}
+  </update>
+</mapper>

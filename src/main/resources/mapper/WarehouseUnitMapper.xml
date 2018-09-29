@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.github.skyisbule.wxpay.dao.WarehouseUnitMapper">
+  <resultMap id="BaseResultMap" type="com.github.skyisbule.wxpay.domain.WarehouseUnit">
+    <id column="wuid" jdbcType="INTEGER" property="wuid" />
+    <result column="area" jdbcType="INTEGER" property="area" />
+    <result column="could_sublet" jdbcType="INTEGER" property="couldSublet" />
+    <result column="min_sublet_area" jdbcType="INTEGER" property="minSubletArea" />
+    <result column="price" jdbcType="INTEGER" property="price" />
+    <result column="supporting_facilities" jdbcType="VARCHAR" property="supportingFacilities" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    wuid, area, could_sublet, min_sublet_area, price, supporting_facilities
+  </sql>
+  <select id="selectByExample" parameterType="com.github.skyisbule.wxpay.domain.WarehouseUnitExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from db_warehouse_unit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="limit != null">
+      <if test="offset != null">
+        limit ${offset}, ${limit}
+      </if>
+      <if test="offset == null">
+        limit ${limit}
+      </if>
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from db_warehouse_unit
+    where wuid = #{wuid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from db_warehouse_unit
+    where wuid = #{wuid,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.github.skyisbule.wxpay.domain.WarehouseUnitExample">
+    delete from db_warehouse_unit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.github.skyisbule.wxpay.domain.WarehouseUnit">
+    insert into db_warehouse_unit (wuid, area, could_sublet, 
+      min_sublet_area, price, supporting_facilities
+      )
+    values (#{wuid,jdbcType=INTEGER}, #{area,jdbcType=INTEGER}, #{couldSublet,jdbcType=INTEGER}, 
+      #{minSubletArea,jdbcType=INTEGER}, #{price,jdbcType=INTEGER}, #{supportingFacilities,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.github.skyisbule.wxpay.domain.WarehouseUnit">
+    insert into db_warehouse_unit
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="wuid != null">
+        wuid,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="couldSublet != null">
+        could_sublet,
+      </if>
+      <if test="minSubletArea != null">
+        min_sublet_area,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="supportingFacilities != null">
+        supporting_facilities,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="wuid != null">
+        #{wuid,jdbcType=INTEGER},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=INTEGER},
+      </if>
+      <if test="couldSublet != null">
+        #{couldSublet,jdbcType=INTEGER},
+      </if>
+      <if test="minSubletArea != null">
+        #{minSubletArea,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=INTEGER},
+      </if>
+      <if test="supportingFacilities != null">
+        #{supportingFacilities,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.github.skyisbule.wxpay.domain.WarehouseUnitExample" resultType="java.lang.Long">
+    select count(*) from db_warehouse_unit
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update db_warehouse_unit
+    <set>
+      <if test="record.wuid != null">
+        wuid = #{record.wuid,jdbcType=INTEGER},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=INTEGER},
+      </if>
+      <if test="record.couldSublet != null">
+        could_sublet = #{record.couldSublet,jdbcType=INTEGER},
+      </if>
+      <if test="record.minSubletArea != null">
+        min_sublet_area = #{record.minSubletArea,jdbcType=INTEGER},
+      </if>
+      <if test="record.price != null">
+        price = #{record.price,jdbcType=INTEGER},
+      </if>
+      <if test="record.supportingFacilities != null">
+        supporting_facilities = #{record.supportingFacilities,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update db_warehouse_unit
+    set wuid = #{record.wuid,jdbcType=INTEGER},
+      area = #{record.area,jdbcType=INTEGER},
+      could_sublet = #{record.couldSublet,jdbcType=INTEGER},
+      min_sublet_area = #{record.minSubletArea,jdbcType=INTEGER},
+      price = #{record.price,jdbcType=INTEGER},
+      supporting_facilities = #{record.supportingFacilities,jdbcType=VARCHAR}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.github.skyisbule.wxpay.domain.WarehouseUnit">
+    update db_warehouse_unit
+    <set>
+      <if test="area != null">
+        area = #{area,jdbcType=INTEGER},
+      </if>
+      <if test="couldSublet != null">
+        could_sublet = #{couldSublet,jdbcType=INTEGER},
+      </if>
+      <if test="minSubletArea != null">
+        min_sublet_area = #{minSubletArea,jdbcType=INTEGER},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=INTEGER},
+      </if>
+      <if test="supportingFacilities != null">
+        supporting_facilities = #{supportingFacilities,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where wuid = #{wuid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.github.skyisbule.wxpay.domain.WarehouseUnit">
+    update db_warehouse_unit
+    set area = #{area,jdbcType=INTEGER},
+      could_sublet = #{couldSublet,jdbcType=INTEGER},
+      min_sublet_area = #{minSubletArea,jdbcType=INTEGER},
+      price = #{price,jdbcType=INTEGER},
+      supporting_facilities = #{supportingFacilities,jdbcType=VARCHAR}
+    where wuid = #{wuid,jdbcType=INTEGER}
+  </update>
+</mapper>
