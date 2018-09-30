@@ -38,15 +38,15 @@
         <div class="panel panel-default">
             <p class="panel-heading no-collapse">后台登录</p>
             <div class="panel-body">
-                <form action="/api/teacher/login" method="post">
+                <form action="/api/user/login" method="post">
                     <input type="hidden" name="_csrf_token" value="" />
                     <div class="form-group">
                         <label for="username">用户名</label>
-                        <input type="text" id="username" class="form-control span12" name="teacheraccount" value="" required="required" />
+                        <input type="text" id="username" class="form-control span12" name="account" value="" required="required" />
                     </div>
                     <div class="form-group">
                         <label for="password">密码</label>
-                        <input type="password" id="password" class="form-control span12 form-control" name="teacherpassword" required="required" />
+                        <input type="password" id="password" class="form-control span12 form-control" name="passwd" required="required" />
                     </div>
                     <button type="submit" class="btn btn-primary pull-right">登录</button>
                     <label class="_remember_me"><input type="checkbox" name="_remember_me" value="on">记住我</label>
