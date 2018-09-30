@@ -88,9 +88,7 @@ public class WarehouseController {
         //todo 这里对数据做一下校验
         String result = "{\"code\":200}";
         try {
-            WarehouseExample e = new WarehouseExample();
             warehouseMapper.insert(vo.getWarehouse());
-            WarehouseUnitExample ue = new WarehouseUnitExample();
             int warehouseId = warehouseDao.getMaxIdFromWarehouse();
             for (WarehouseUnit unit : vo.getUnits()) {
                 unit.setWarehouseId(warehouseId);
