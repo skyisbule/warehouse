@@ -61,4 +61,10 @@ public class RequireController {
         return result;
     }
 
+    @ApiOperation("通过需求id获取需求的完整信息")
+    @RequestMapping("/get-by-id")
+    public Require getById(int rid){
+        return requireMapper.selectByPrimaryKey(rid);
+    }
+
 }

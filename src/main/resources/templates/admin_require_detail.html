@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>需求详情页</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta content="text/html;charset=UTF-8"/>
+    <script src="https://cdn.bootcss.com/pace/1.0.2/pace.min.js"></script>
+    <link href="https://cdn.bootcss.com/pace/1.0.2/themes/pink/pace-theme-flash.css" rel="stylesheet">
+    <link href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/table/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="/table/css/fs.css" media="all"/>
+    <script type="text/javascript" src="/table/plugins/layui/layui.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/table/plugins/frame/js/fsDict.js?v=1.7.0"></script>
+    <script type="text/javascript" src="/table/plugins/frame/js/fs.js?v=1.7.0"></script>
+    <script type="text/javascript" src="/table/plugins/frame/js/frame.js?v=1.7.0"></script>
+</head>
+<body>
+<h1>用户个人信息</h1>
+<div id="user">
+
+</div>
+<hr>
+<h1>仓库信息</h1>
+<div>
+
+
+    <form class="layui-form" id="edit_form" isLoad="1">
+
+        <input type="hidden" name="id"/>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">位置：</label>
+            <div class="layui-input-block">
+                <input type="text" id="locates" name="locates" required="" lay-verify="required" placeholder="请输入位置，若多个请用、分割" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">面积：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="area" name="area" placeholder="默认0" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">用途：</label>
+            <div class="layui-input-block">
+                <input type="text" id="purpose" name="purpose" required="" lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">消防需求：</label>
+            <div class="layui-input-block">
+                <input type="text" id="fireControlRequire" name="fireControlRequire" required="" lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">月台需求：</label>
+            <div class="layui-input-block">
+                <input type="text" id="platformRequire" name="platformRequire" required="" lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">楼层需求：</label>
+            <div class="layui-input-block">
+                <input type="text"  id="floorRequire" name="floorRequire" required="" lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">需求时间：</label>
+            <div class="layui-input-block">
+                <input type="text" id="requireTime" name="requireTime" required="" lay-verify="required" placeholder="默认时间" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">租期：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="leaseTerm" name="leaseTerm" placeholder="默认0" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">最高价格：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="maxPrice" name="maxPrice" placeholder="默认0" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">订单状态：</label>
+            <div class="layui-input-inline">
+                <input type="text" id="status" name="status" placeholder="默认0" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">备注：</label>
+            <div class="layui-input-block">
+                <textarea id="remark" name="remark" placeholder="请输入备注" class="layui-textarea"></textarea>
+            </div>
+        </div>
+
+        <hr/>
+        <div class="layui-form-item">
+            <div class="layui-input-block">
+                <button class="layui-btn" lay-submit="" lay-filter="edit" url="/fsbus/DEMO1012"><i class="layui-icon">&#xe642;</i>编辑</button>
+                <button type="button" class="layui-btn layui-btn-primary" function="close">关闭</button>
+            </div>
+        </div>
+
+    </form>
+
+
+</div>
+<script>
+    function GetRequest() {
+        let url = location.search; //获取url中"?"符后的字串
+        let theRequest = new Object();
+        if (url.indexOf("?") != -1) {
+            var str = url.substr(1);
+            strs = str.split("&");
+            for(let i = 0; i < strs.length; i ++) {
+                theRequest[strs[i].split("=")[0]]=unescape(strs[i].split("=")[1]);
+            }
+        }
+        return theRequest;
+    }
+
+    function loadData() {
+        let openId = GetRequest("openId");
+        let rid    = GetRequest("rid");
+
+        $.post("/api/user/get-by-id",{
+            openId : openId
+        },(result,status)=>{
+            let obj = result;
+            $("#user").append("<p>用户的真实姓名："+obj.realName+"</p>");
+            $("#user").append("<p>手机号："+obj.telNum+"</p>");
+            $("#user").append("<p>公司名："+obj.company+"</p>");
+        });
+
+        $.post("/api/require/get-by-id",{
+            rid : rid
+        },(result,status)=>{
+            let obj = result;
+            $("#user").append("<p>用户的真实姓名："+obj.realName+"</p>");
+            $("#user").append("<p>手机号："+obj.telNum+"</p>");
+            $("#user").append("<p>公司名："+obj.company+"</p>");
+        });
+
+    }
+</script>
+</body>
+</html>
