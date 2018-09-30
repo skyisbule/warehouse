@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<!--suppress JSJQueryEfficiency -->
 <html lang="zh-cn">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>zui_demo</title>
-    <!-- zui -->
     <link href="/static/zui/css/zui.min.css" rel="stylesheet">
     <link href="/static/zui/lib/datetimepicker/datetimepicker.min.css" rel="stylesheet">
     <link href="/static/css/base.css" rel="stylesheet">
 </head>
 <body>
-<!-- header -->
 <header>
     <nav class="navbar navbar-inverse " role="navigation">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse"
                     data-target="#bs-example-navbar-collapse-1">
@@ -24,10 +20,9 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">zui管理系统</a>
+            <a class="navbar-brand" href="#">仓库管理系统</a>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse navbar-collapse-example">
             <ul class="nav navbar-nav navbar-avatar navbar-right">
                 <li>
@@ -38,7 +33,7 @@
                     </a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">陈海山
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">管理员
                         <span class="thumb-small avatar inline">
                                     <img src="/static/Images/avatar/avatar.jpg" alt="Mika Sokeil" class="img-circle">
                                 </span>
@@ -61,27 +56,27 @@
     <nav class="menu" id="left-menu" data-toggle="menu">
         <ul class="nav nav-primary">
             <li><a href="/teacher/index"><i class="icon-home"></i> 主面板</a></li>
-            <li><a href="#"><i class="icon-user"></i>班级管理</a>
+            <li><a href="#"><i class="icon-user"></i>需求管理</a>
                 <ul class="nav">
                     <li>
-                        <a href="#" onclick="flush_page('/teacher/my_class')"><i class="icon-shopping-cart" ></i>我的班级</a>
+                        <a href="#" onclick="flush_page('/admin_require')"><i class="icon-shopping-cart" ></i>查看需求</a>
                     </li>
                 </ul>
                 <ul class="nav">
                     <li>
-                        <a href="#" onclick="flush_page('/teacher/create_class')"><i class="icon-shopping-cart"></i>创建班级</a>
+                        <a href="#" onclick="flush_page('/teacher/create_class')"><i class="icon-shopping-cart"></i>概况</a>
                     </li>
                 </ul>
             </li>
-            <li><a href="#"><i class="icon-yen"></i>题库</a>
+            <li><a href="#"><i class="icon-yen"></i>供应管理</a>
                 <ul class="nav">
                     <li>
-                        <a href="#" onclick="flush_page('/teacher/add_question')"><i class="icon-shopping-cart"></i>出题</a>
+                        <a href="#" onclick="flush_page('/admin_warehouse')"><i class="icon-shopping-cart"></i>查看供应</a>
                     </li>
                 </ul>
                 <ul class="nav">
                     <li>
-                        <a href="editor-md.html"><i class="icon-shopping-cart"></i>发布题目到班级</a>
+                        <a href="editor-md.html"><i class="icon-shopping-cart"></i>概况</a>
                     </li>
                 </ul>
             </li>
@@ -143,13 +138,13 @@
     });
 </script>
 <script>
-    $(".page-body").append("<iframe src=\"/teacher/add_question\" frameborder=\"0\" width=\"1550\" height=\"2000\"> ></iframe>");
+    $(".page-body").append("<iframe src=\"/teacher/add_question\" frameborder=\"0\" width=\"1100\" height=\"650\"> ></iframe>");
 </script>
 <script>
 
     function flush_page(url) {
         $(".page-body").empty();
-        $(".page-body").append("<iframe src=\""+url+"\" frameborder=\"0\" width=\"1550\" height=\"2000\"> ></iframe>");
+        $(".page-body").append("<iframe src=\""+url+"\" frameborder=\"0\" width=\"1100\" height=\"650\"> ></iframe>");
     }
 
 </script>

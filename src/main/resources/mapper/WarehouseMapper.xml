@@ -12,6 +12,7 @@
     <result column="advantage" jdbcType="VARCHAR" property="advantage" />
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -73,7 +74,7 @@
   </sql>
   <sql id="Base_Column_List">
     wid, locate, picture, park_service, suitable_for, is_pass, open_id, advantage, remark, 
-    status
+    status, create_time
   </sql>
   <select id="selectByExample" parameterType="com.github.skyisbule.wxpay.domain.WarehouseExample" resultMap="BaseResultMap">
     select
@@ -117,11 +118,11 @@
     insert into db_warehouse (wid, locate, picture, 
       park_service, suitable_for, is_pass, 
       open_id, advantage, remark, 
-      status)
+      status, create_time)
     values (#{wid,jdbcType=INTEGER}, #{locate,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
       #{parkService,jdbcType=VARCHAR}, #{suitableFor,jdbcType=VARCHAR}, #{isPass,jdbcType=INTEGER}, 
       #{openId,jdbcType=CHAR}, #{advantage,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER})
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
   </insert>
   <insert id="insertSelective" parameterType="com.github.skyisbule.wxpay.domain.Warehouse">
     insert into db_warehouse
@@ -156,6 +157,9 @@
       <if test="status != null">
         status,
       </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="wid != null">
@@ -187,6 +191,9 @@
       </if>
       <if test="status != null">
         #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
     </trim>
   </insert>
@@ -229,6 +236,9 @@
       <if test="record.status != null">
         status = #{record.status,jdbcType=INTEGER},
       </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -245,7 +255,8 @@
       open_id = #{record.openId,jdbcType=CHAR},
       advantage = #{record.advantage,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
-      status = #{record.status,jdbcType=INTEGER}
+      status = #{record.status,jdbcType=INTEGER},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -280,6 +291,9 @@
       <if test="status != null">
         status = #{status,jdbcType=INTEGER},
       </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
     </set>
     where wid = #{wid,jdbcType=INTEGER}
   </update>
@@ -293,7 +307,8 @@
       open_id = #{openId,jdbcType=CHAR},
       advantage = #{advantage,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER}
+      status = #{status,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
     where wid = #{wid,jdbcType=INTEGER}
   </update>
 </mapper>

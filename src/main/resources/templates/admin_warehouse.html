@@ -15,23 +15,19 @@
     <script type="text/javascript" src="/table/plugins/frame/js/frame.js?v=1.7.0"></script>
 </head>
 
-<table id="fsDatagrid" lay-filter="fsDatagrid" class="fsDatagrid" isLoad="1" url="/api/require/get-by-page?status=5" isPage="1" sortType="1" pageSize="10" defaultForm="query_form" height="full-135"></table>
+<table id="fsDatagrid" lay-filter="fsDatagrid" class="fsDatagrid" isLoad="1" url="/api/warehouse//get-warehouse-simple-by-page?status=5" isPage="1" sortType="1" pageSize="10" defaultForm="query_form" height="full-135"></table>
 
 <div class="fsDatagridCols">
     <p type="numbers" title="#"/>
     <p checkbox="true"/>
-    <p field="rid" title="ID" width="60" sort="true"/>
-    <p field="locates" title="位置" width="150"/>
-    <p field="area" title="面积" width="80"/>
-    <p field="purpose" title="用途" width="100"/>
-    <p field="fireControlRequire" title="消防需求" width="100" />
-    <p field="platformRequire" title="月台需求" width="100"/>
-    <p field="floorRequire" title="楼层要求" width="100"/>
-    <p field="requireTime" title="创建时间" width="150"/>
-    <p field="leaseTerm" title="租期" width="80"/>
-    <p field="maxPrice" title="最高价格" width="100"/>
-    <p field="remark" title="备注" width="180"/>
-    <p field="status" title="状态" width="60"/>
+    <p field="wid" title="ID" width="60" sort="true"/>
+    <p field="locate" title="位置" width="150"/>
+    <p field="parkService" title="园区服务" width="80"/>
+    <p field="suitableFor" title="适合行业" width="100"/>
+    <p field="advantage" title="优势" width="100" />
+    <p field="remark" title="备注" width="100"/>
+    <p field="status" title="状态" width="100"/>
+    <p field="createTime" title="创建时间" width="150"/>
     <p fixed="right" align="center" toolbar="#barDemo" title="操作" width="220"/>
 </div>
 

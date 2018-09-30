@@ -7,6 +7,7 @@ import com.github.skyisbule.wxpay.domain.Warehouse;
 import com.github.skyisbule.wxpay.domain.WarehouseExample;
 import com.github.skyisbule.wxpay.domain.WarehouseUnit;
 import com.github.skyisbule.wxpay.domain.WarehouseUnitExample;
+import com.github.skyisbule.wxpay.result.Result;
 import com.github.skyisbule.wxpay.vo.WarehouseWithUnitVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 @Api("关于仓库的api，主要是发布和获取")
@@ -33,17 +35,29 @@ public class WarehouseController {
 
     @ApiOperation("通过页码获取仓库信息，但不返回里边的存储单元,page从0开始传")
     @RequestMapping("/get-warehouse-simple-by-page")
-    public List<Warehouse> getSimpleByPage(@ApiParam("从0开始传") int page,
-                                           @ApiParam("传5则代表获取全部")
-                                                   int status){
+    public Result getSimpleByPage(@ApiParam("从一开始") int pageNum,
+                                           @ApiParam("状态为5则为全部") int status,
+                                           @ApiParam("一页返回多少数据，不填默认10")Integer pageSize){
+        if(pageSize==null) pageNum = 10;
         WarehouseExample e = new WarehouseExample();
-        e.setOffset(10*page);
-        e.setLimit(10);
+        e.setOffset(10*(pageNum-1));
+        e.setLimit(pageSize);
         if(status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status);
         }
-        return warehouseMapper.selectByExample(e);
+        List<Warehouse> list =  warehouseMapper.selectByExample(e);
+        HashMap<String,Object> map = new HashMap<>();
+        Result result = new Result();
+        result.setErrorNo(0);
+        map.put("list",list);
+        map.put("pageNum",pageNum+1);
+        map.put("pageSize",pageSize);
+        int total = this.countWarehouse(status);
+        map.put("pages",total/pageSize);
+        map.put("total",total);
+        result.setResults("data",map);
+        return result;
     }
 
     @ApiOperation("通过状态获取有多少仓库，返回整数")

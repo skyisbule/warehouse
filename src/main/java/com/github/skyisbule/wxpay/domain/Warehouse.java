@@ -1,6 +1,7 @@
 package com.github.skyisbule.wxpay.domain;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * @author 
@@ -52,6 +53,11 @@ public class Warehouse implements Serializable {
      * 0、未审核 1、已经通过审核 3、订单已完成 4、订单已取消
      */
     private Integer status;
+
+    /**
+     * 创建时间
+     */
+    private Date createTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -135,6 +141,14 @@ public class Warehouse implements Serializable {
         this.status = status;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -156,7 +170,8 @@ public class Warehouse implements Serializable {
             && (this.getOpenId() == null ? other.getOpenId() == null : this.getOpenId().equals(other.getOpenId()))
             && (this.getAdvantage() == null ? other.getAdvantage() == null : this.getAdvantage().equals(other.getAdvantage()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
-            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()));
+            && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
     }
 
     @Override
@@ -173,6 +188,7 @@ public class Warehouse implements Serializable {
         result = prime * result + ((getAdvantage() == null) ? 0 : getAdvantage().hashCode());
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
+        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         return result;
     }
 
@@ -192,6 +208,7 @@ public class Warehouse implements Serializable {
         sb.append(", advantage=").append(advantage);
         sb.append(", remark=").append(remark);
         sb.append(", status=").append(status);
+        sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

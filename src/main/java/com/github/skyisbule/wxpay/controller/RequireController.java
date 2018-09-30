@@ -36,11 +36,13 @@ public class RequireController {
 
     @ApiOperation("根据状态和page返回需求")
     @RequestMapping("/get-by-page")
-    public Result getByPage(@ApiParam("从零开始") int pageNum,
-                                   @ApiParam("状态为5则为全部") int status){
+    public Result getByPage(@ApiParam("从一开始") int pageNum,
+                            @ApiParam("状态为5则为全部") int status,
+                            @ApiParam("一页返回多少数据，不填默认10")Integer pageSize){
+        if(pageSize==null) pageNum = 10;
         RequireExample e = new RequireExample();
         e.setOffset(10*(pageNum-1));
-        e.setLimit(10);
+        e.setLimit(pageSize);
         if (status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status);
@@ -50,10 +52,11 @@ public class RequireController {
         Result result = new Result();
         result.setErrorNo(0);
         map.put("list",list);
-        map.put("pageNum",1);
-        map.put("pageSize",10);
-        map.put("pages",1);
-        map.put("total",1);
+        map.put("pageNum",pageNum+1);
+        map.put("pageSize",pageSize);
+        int total = this.countRequire(status);
+        map.put("pages",total/pageSize);
+        map.put("total",total);
         result.setResults("data",map);
         return result;
     }

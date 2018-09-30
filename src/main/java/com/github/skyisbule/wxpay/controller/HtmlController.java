@@ -9,7 +9,13 @@ public class HtmlController {
     @RequestMapping("/login")
     public String d(){return "login";}
 
-    @RequestMapping("/test")
-    public String test(){return "admin_require";}
+    @RequestMapping("/admin_require")
+    public String admin_require(){return "admin_require";}
+
+    @RequestMapping("/admin_warehouse")
+    public String admin_warehouse(){return "admin_warehouse";}
+
+    @RequestMapping("/index")
+    public String index(){return "index";}
 
 }
