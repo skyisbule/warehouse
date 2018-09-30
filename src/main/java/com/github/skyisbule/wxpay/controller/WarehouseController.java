@@ -42,6 +42,7 @@ public class WarehouseController {
         WarehouseExample e = new WarehouseExample();
         e.setOffset(10*(pageNum-1));
         e.setLimit(pageSize);
+        e.setOrderByClause("wid desc");
         if(status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status);

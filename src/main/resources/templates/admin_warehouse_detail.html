@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>需求详情页</title>
+    <title>供应详情页</title>
     <script src="https://cdn.bootcss.com/jquery/3.3.0/jquery.min.js"></script>
     <meta charset="UTF-8">
     <meta content="text/html;charset=UTF-8"/>
@@ -18,80 +18,45 @@
     <script type="text/javascript" src="/table/plugins/frame/js/frame.js?v=1.7.0"></script>
 </head>
 <body>
-<h1>用户个人信息</h1>
+<h2>用户个人信息</h2>
 <div id="user">
 
 </div>
 <hr>
-<h1>仓库信息</h1>
+<h2>供应信息</h2>
 <div>
 
 
     <form class="layui-form" id="edit_form" isLoad="1">
 
-        <input type="hidden" name="id"/>
+        <input type="hidden" name="wid"/>
 
         <div class="layui-form-item">
             <label class="layui-form-label">位置：</label>
             <div class="layui-input-block">
-                <input type="text" id="locates" name="locates" required="" lay-verify="required" placeholder="请输入位置，若多个请用、分割" autocomplete="off" class="layui-input"/>
+                <input type="text" id="locate" name="locate" required="" lay-verify="required" placeholder="请输入位置，若多个请用、分割" autocomplete="off" class="layui-input"/>
             </div>
         </div>
 
 
         <div class="layui-form-item">
-            <label class="layui-form-label">面积：</label>
+            <label class="layui-form-label">园区服务：</label>
             <div class="layui-input-inline">
-                <input type="text" id="area" name="area" placeholder="默认0" autocomplete="off" class="layui-input"/>
+                <input type="text" id="parkService" name="parkService" placeholder="默认0" autocomplete="off" class="layui-input"/>
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">用途：</label>
+            <label class="layui-form-label">适合行业：</label>
             <div class="layui-input-block">
-                <input type="text" id="purpose" name="purpose" required="" lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input"/>
+                <input type="text" id="suitableFor" name="suitableFor" required="" lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input"/>
             </div>
         </div>
 
         <div class="layui-form-item">
-            <label class="layui-form-label">消防需求：</label>
+            <label class="layui-form-label">优势：</label>
             <div class="layui-input-block">
-                <input type="text" id="fireControlRequire" name="fireControlRequire" required="" lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input"/>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">月台需求：</label>
-            <div class="layui-input-block">
-                <input type="text" id="platformRequire" name="platformRequire" required="" lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input"/>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">楼层需求：</label>
-            <div class="layui-input-block">
-                <input type="text"  id="floorRequire" name="floorRequire" required="" lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input"/>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">需求时间：</label>
-            <div class="layui-input-block">
-                <input type="text" id="requireTime" name="requireTime" required="" lay-verify="required" placeholder="默认时间" autocomplete="off" class="layui-input"/>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">租期：</label>
-            <div class="layui-input-inline">
-                <input type="text" id="leaseTerm" name="leaseTerm" placeholder="默认0" autocomplete="off" class="layui-input"/>
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <label class="layui-form-label">最高价格：</label>
-            <div class="layui-input-inline">
-                <input type="text" id="maxPrice" name="maxPrice" placeholder="默认0" autocomplete="off" class="layui-input"/>
+                <input type="text" id="advantage" name="advantage" required="" lay-verify="required" placeholder="必填" autocomplete="off" class="layui-input"/>
             </div>
         </div>
 

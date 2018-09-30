@@ -18,6 +18,9 @@ public class HtmlController {
     @RequestMapping("/admin_warehouse")
     public String admin_warehouse(){return "admin_warehouse";}
 
+    @RequestMapping("/admin_warehouse_detail")
+    public String admin_warehouse_detail(){return "admin_warehouse_detail";}
+
     @RequestMapping("/index")
     public String index(){return "index";}
 
