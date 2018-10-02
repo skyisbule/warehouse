@@ -106,21 +106,24 @@ public class RequireExample {
 
         protected void addCriterion(String condition) {
             if (condition == null) {
-                throw new RuntimeException("Value for condition cannot be null");
+                //throw new RuntimeException("Value for condition cannot be null");
+                return;
             }
             criteria.add(new Criterion(condition));
         }
 
         protected void addCriterion(String condition, Object value, String property) {
             if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
+                //throw new RuntimeException("Value for " + property + " cannot be null");
+                return ;
             }
             criteria.add(new Criterion(condition, value));
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
             if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
+                //throw new RuntimeException("Between values for " + property + " cannot be null");
+                return;
             }
             criteria.add(new Criterion(condition, value1, value2));
         }

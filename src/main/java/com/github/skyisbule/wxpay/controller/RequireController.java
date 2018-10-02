@@ -37,6 +37,7 @@ public class RequireController {
     @ApiOperation("根据状态和page返回需求")
     @RequestMapping("/get-by-page")
     public Result getByPage(@ApiParam("从一开始") int pageNum,
+                            @ApiParam("城市")String city,
                             @ApiParam("状态为5则为全部") int status,
                             @ApiParam("一页返回多少数据，不填默认10")Integer pageSize){
         if(pageSize==null) pageNum = 10;
@@ -46,7 +47,8 @@ public class RequireController {
         e.setOrderByClause("rid desc");
         if (status>0&&status<5){
             e.createCriteria()
-                    .andStatusEqualTo(status);
+                    .andStatusEqualTo(status)
+                    .andLocatesLike(city);
         }
         List<Require> list = requireMapper.selectByExample(e);
         HashMap<String,Object> map = new HashMap<>();

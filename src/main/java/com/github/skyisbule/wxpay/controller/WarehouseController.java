@@ -36,8 +36,9 @@ public class WarehouseController {
     @ApiOperation("通过页码获取仓库信息，但不返回里边的存储单元,page从0开始传")
     @RequestMapping("/get-warehouse-simple-by-page")
     public Result getSimpleByPage(@ApiParam("从一开始") int pageNum,
-                                           @ApiParam("状态为5则为全部") int status,
-                                           @ApiParam("一页返回多少数据，不填默认10")Integer pageSize){
+                                  @ApiParam("城市")String city,
+                                  @ApiParam("状态为5则为全部") int status,
+                                  @ApiParam("一页返回多少数据，不填默认10")Integer pageSize){
         if(pageSize==null) pageNum = 10;
         WarehouseExample e = new WarehouseExample();
         e.setOffset(10*(pageNum-1));
@@ -45,7 +46,8 @@ public class WarehouseController {
         e.setOrderByClause("wid desc");
         if(status>0&&status<5){
             e.createCriteria()
-                    .andStatusEqualTo(status);
+                    .andStatusEqualTo(status)
+                    .andLocateLike(city);
         }
         List<Warehouse> list =  warehouseMapper.selectByExample(e);
         HashMap<String,Object> map = new HashMap<>();
