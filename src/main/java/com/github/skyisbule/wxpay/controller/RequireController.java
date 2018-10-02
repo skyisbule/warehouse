@@ -8,6 +8,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,11 +26,13 @@ public class RequireController {
 
     @ApiOperation("计算总共有多少需求")
     @RequestMapping("/count-by-status")
-    public int countRequire(@ApiParam("5的话则返回全部") int status){
+    public int countRequire(@ApiParam("5的话则返回全部") int status,
+                            @ApiParam("城市")String city){
         RequireExample e = new RequireExample();
         if (status>0&&status<5){
             e.createCriteria()
-                    .andStatusEqualTo(status);
+                    .andStatusEqualTo(status)
+                    .andLocatesLike(city);
         }
         return (int)requireMapper.countByExample(e);
     }
@@ -57,7 +60,7 @@ public class RequireController {
         map.put("list",list);
         map.put("pageNum",pageNum+1);
         map.put("pageSize",pageSize);
-        int total = this.countRequire(status);
+        int total = this.countRequire(status,city);
         map.put("pages",total/pageSize);
         map.put("total",total);
         result.setResults("data",map);
@@ -68,6 +71,20 @@ public class RequireController {
     @RequestMapping("/get-by-id")
     public Require getById(int rid){
         return requireMapper.selectByPrimaryKey(rid);
+    }
+
+    @ApiOperation("修改需求信息")
+    @RequestMapping("/update")
+    public String update(Require require){
+        requireMapper.updateByPrimaryKey(require);
+        return "{\"errorNo\":\"0\",\"errorInfo\":\"执行成功\",\"results\":{\"data\":[]}}";
+    }
+
+    @ApiOperation("添加一条需求")
+    @RequestMapping("/add")
+    public String add(Require require){
+        requireMapper.insert(require);
+        return "success";
     }
 
 }

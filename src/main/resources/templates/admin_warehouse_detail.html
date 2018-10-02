@@ -18,14 +18,13 @@
     <script type="text/javascript" src="/table/plugins/frame/js/frame.js?v=1.7.0"></script>
 </head>
 <body>
-<h2>用户个人信息</h2>
+<h3>用户个人信息</h3>
 <div id="user">
 
 </div>
 <hr>
 <h2>供应信息</h2>
 <div>
-
 
     <form class="layui-form" id="edit_form" isLoad="1">
 
@@ -77,15 +76,23 @@
         <hr/>
         <div class="layui-form-item">
             <div class="layui-input-block">
-                <button class="layui-btn" lay-submit="" lay-filter="edit" url="/fsbus/DEMO1012"><i class="layui-icon">&#xe642;</i>编辑</button>
-                <button type="button" class="layui-btn layui-btn-primary" function="close">关闭</button>
+                <button class="layui-btn" lay-submit="" lay-filter="edit" url="/api/warehouse/update-warehouse"><i class="layui-icon">&#xe642;</i>修改主体信息</button>
+                <button type="button" class="layui-btn layui-btn-primary" function="close">关闭页面</button>
             </div>
         </div>
 
     </form>
 
-
 </div>
+<hr>
+<h3>仓库单元</h3>
+<div>
+    <form id="unit">
+
+    </form>
+    <button class = "layui-btn" onclick="commitUnit()">修改存储单元单元</button>
+</div>
+
 <script>
     function GetRequest(name) {
         let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
@@ -96,8 +103,9 @@
 
     function loadData() {
         let openId = GetRequest("openId");
-        let rid    = GetRequest("rid");
+        let wid    = GetRequest("wid");
 
+        //加载用户信息
         $.post("/api/user/get-by-id",{
             openId : openId
         },(result,status)=>{
@@ -107,7 +115,73 @@
             $("#user").append("<p>公司名："+obj.company+"</p>");
         });
 
+        //加载仓库单元
+        $.post("/api/warehouse/get-warehouse-unit",{
+            warehouseId : wid
+        },(result,status)=> {
+            for (let i = 0; i < result.length; i++) {
+              let obj  = result[i];
+              let id   = "uid"+i;
+                let couldSublet;
+                if (obj.couldSublet == 0)
+                    couldSublet = "可分租";
+                else
+                    couldSublet = "不可分租";
+              let html  = "<div class = 'unit-body' " + "id=\'" + id+ "\'>\n";
+                html+= "           <p>面积：<input name=\"area\" class ='area' value = '"+obj.area+"'/></p>\n" +
+                    "              <p>是否可以分租：<input name=\"couldSublet\" class='couldSublet' value = '"+couldSublet+"'/>(请一定填写 可分租 或 不可分租)</p>\n" +
+                    "              <p>最小分租面积：<input name=\"minSubletArea\" class='minSubletArea' value = '"+obj.minSubletArea+"'/></p>\n" +
+                    "              <p>价格：<input name=\"price\" class='price' value = '"+obj.price+"'/></p>\n" +
+                    "              <p>配套设施：<input name=\"supportingFacilities\" class='supportingFacilities' value = '"+obj.supportingFacilities+"' /></p>\n" +
+                    "              <hr></div>";
+              $("#unit").append(html);
+        }
+        });
     }
+
+    function commitUnit() {
+        let objs = new Array();
+        let tagElements = document.getElementsByClassName('unit-body');
+        for (let j = 0; j < tagElements.length; j++) {
+            let obj = {
+                area : 1,
+                couldSublet : "",
+                minSubletArea : "",
+                price : "",
+                supportingFacilities : "",
+                warehouseId: GetRequest("wid")
+            };
+            obj.area = $(tagElements[j]).find(".area").val();
+            obj.couldSublet = $(tagElements[j]).find(".couldSublet").val();
+            if(obj.couldSublet == "可分租"){
+                obj.couldSublet = 1;
+            }else if (obj.couldSublet == "不可分租"){
+                obj.couldSublet = 0;
+            } else{
+                obj.couldSublet = 0;
+            }
+            obj.minSubletArea = $(tagElements[j]).find(".minSubletArea").val();
+            obj.price = $(tagElements[j]).find(".price").val();
+            obj.supportingFacilities = $(tagElements[j]).find(".supportingFacilities").val();
+            objs.push(obj);
+        }
+        let jsons = JSON.stringify(objs);
+        $.ajax({
+            type: "POST",
+            url: "/api/warehouse/update-unit",
+            contentType: "application/json; charset=utf-8",
+            data: jsons,
+            dataType: "json",
+            success: function (message) {
+
+            },
+            error: function (message) {
+            }
+        });
+        alert("success");
+        window.close();
+    }
+
 
     loadData();
 </script>
