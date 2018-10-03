@@ -1,5 +1,7 @@
 package com.github.skyisbule.wxpay.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -42,6 +44,7 @@ public class Require implements Serializable {
     /**
      * 需求时间
      */
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date requireTime;
 
     /**
