@@ -4,15 +4,17 @@ import com.github.skyisbule.wxpay.dao.RequireMapper;
 import com.github.skyisbule.wxpay.domain.Require;
 import com.github.skyisbule.wxpay.domain.RequireExample;
 import com.github.skyisbule.wxpay.result.Result;
+import com.github.skyisbule.wxpay.service.UserService;
+import com.github.skyisbule.wxpay.vo.RequireWithContactVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -23,6 +25,8 @@ public class RequireController {
 
     @Autowired
     RequireMapper requireMapper;
+    @Autowired
+    UserService userService;
 
     @ApiOperation("计算总共有多少需求")
     @RequestMapping("/count-by-status")
@@ -54,10 +58,18 @@ public class RequireController {
                     .andLocatesLike(city);
         }
         List<Require> list = requireMapper.selectByExample(e);
+        List<RequireWithContactVO> vos = new ArrayList<>();
+        //这里获取一下用户信息
+        for (Require require : list) {
+            RequireWithContactVO vo = new RequireWithContactVO();
+            vo.setRequire(require);
+            vo.setUser(userService.getByOpenId(require.getOpenId()));
+            vos.add(vo);
+        }
         HashMap<String,Object> map = new HashMap<>();
         Result result = new Result();
         result.setErrorNo(0);
-        map.put("list",list);
+        map.put("list",vos);
         map.put("pageNum",pageNum+1);
         map.put("pageSize",pageSize);
         int total = this.countRequire(status,city);
