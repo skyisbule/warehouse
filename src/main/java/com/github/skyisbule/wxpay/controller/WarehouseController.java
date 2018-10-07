@@ -76,15 +76,21 @@ public class WarehouseController {
 
     @ApiOperation("通过页码数获取全部的仓库信息信息，包括存储单元")
     @RequestMapping("/get-warehouse-all-by-page")
-    public List<WarehouseWithUnitVO> getAllByPage(@ApiParam("从0开始传")int page,
-                                                  @ApiParam("传5则代表获取全部")
-                                                   int status) {
+    public List<WarehouseWithUnitVO> getAllByPage(@ApiParam("从一开始") int pageNum,
+                                                  @ApiParam("城市")String city,
+                                                  @ApiParam("状态为5则为全部") int status,
+                                                  @ApiParam("一页返回多少数据，不填默认10")Integer pageSize,
+                                                  @ApiParam("用户的openid")String openId) {
+        if(pageSize==null) pageNum = 10;
         WarehouseExample e = new WarehouseExample();
-        e.setOffset(10*page);
-        e.setLimit(10);
+        e.setOffset(10*(pageNum-1));
+        e.setLimit(pageSize);
+        e.setOrderByClause("wid desc");
         if(status>0&&status<5){
             e.createCriteria()
-                    .andStatusEqualTo(status);
+                    .andStatusEqualTo(status)
+                    .andLocateLike(city)
+                    .andOpenIdEqualTo(openId);
         }
         List<Warehouse> warehouses =  warehouseMapper.selectByExample(e);
         List<WarehouseWithUnitVO> results = new ArrayList<>(10);

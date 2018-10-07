@@ -46,7 +46,8 @@ public class RequireController {
     public Result getByPage(@ApiParam("从一开始") int pageNum,
                             @ApiParam("城市")String city,
                             @ApiParam("状态为5则为全部") int status,
-                            @ApiParam("一页返回多少数据，不填默认10")Integer pageSize){
+                            @ApiParam("一页返回多少数据，不填默认10")Integer pageSize,
+                            @ApiParam("用户的openid")String openId){
         if(pageSize==null) pageNum = 10;
         RequireExample e = new RequireExample();
         e.setOffset(10*(pageNum-1));
@@ -55,7 +56,8 @@ public class RequireController {
         if (status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status)
-                    .andLocatesLike(city);
+                    .andLocatesLike(city)
+                    .andOpenIdEqualTo(openId);
         }
         List<Require> list = requireMapper.selectByExample(e);
         List<RequireWithContactVO> vos = new ArrayList<>();
