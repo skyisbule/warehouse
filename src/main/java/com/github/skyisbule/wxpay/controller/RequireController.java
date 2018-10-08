@@ -28,10 +28,10 @@ public class RequireController {
     @Autowired
     UserService userService;
 
-    @ApiOperation("计算总共有多少需求")
+    @ApiOperation("通过订单状态以及城市名称计算总共有多少需求")
     @RequestMapping("/count-by-status")
-    public int countRequire(@ApiParam("5的话则返回全部") int status,
-                            @ApiParam("城市")String city){
+    public int countRequire(@ApiParam("订单状态，5的话则返回全部") int status,
+                            @ApiParam("城市名称")String city){
         RequireExample e = new RequireExample();
         if (status>0&&status<5){
             e.createCriteria()
@@ -41,12 +41,12 @@ public class RequireController {
         return (int)requireMapper.countByExample(e);
     }
 
-    @ApiOperation("根据状态和page返回需求")
+    @ApiOperation("根据状态页码等参数返回详细的需求数组，注其他4个参数选填，不填则不过滤")
     @RequestMapping("/get-by-page")
-    public Result getByPage(@ApiParam("从一开始") int pageNum,
-                            @ApiParam("城市")String city,
+    public Result getByPage(@ApiParam("必填：页码号，从1开始") int pageNum,
+                            @ApiParam("城市名称")String city,
                             @ApiParam("状态为5则为全部") int status,
-                            @ApiParam("一页返回多少数据，不填默认10")Integer pageSize,
+                            @ApiParam("一页返回多少数据，不填的话默认为10")Integer pageSize,
                             @ApiParam("用户的openid")String openId){
         if(pageSize==null) pageNum = 10;
         RequireExample e = new RequireExample();
@@ -81,7 +81,7 @@ public class RequireController {
         return result;
     }
 
-    @ApiOperation("通过需求id获取需求的完整信息")
+    @ApiOperation("通过需求的rid获取需求的完整信息")
     @RequestMapping("/get-by-id")
     public Require getById(int rid){
         return requireMapper.selectByPrimaryKey(rid);

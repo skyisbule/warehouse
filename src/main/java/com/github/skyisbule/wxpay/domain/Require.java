@@ -1,5 +1,7 @@
 package com.github.skyisbule.wxpay.domain;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -8,58 +10,70 @@ import java.util.Date;
 /**
  * @author 
  */
+@ApiModel("需求的实体")
 public class Require implements Serializable {
+    @ApiModelProperty("主键id，添加的接口不需要传")
     private Integer rid;
 
     /**
      * 位置
      */
+    @ApiModelProperty("地理位置，若有多个则以空格作为分隔符")
     private String locates;
 
     /**
      * 面积
      */
+    @ApiModelProperty("面积")
     private Integer area;
 
     /**
      * 用途
      */
+    @ApiModelProperty("用途")
     private String purpose;
 
     /**
      * 消防需求
      */
+    @ApiModelProperty("消防需求")
     private String fireControlRequire;
 
     /**
      * 月台需求
      */
+    @ApiModelProperty("月台需求")
     private String platformRequire;
 
     /**
      * 楼层要求
      */
+    @ApiModelProperty("楼层需求")
     private String floorRequire;
 
     /**
      * 需求时间
      */
+    @ApiModelProperty("提交这条需求的时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date requireTime;
 
     /**
      * 租期
      */
+    @ApiModelProperty("租期")
     private String leaseTerm;
 
     /**
      * 最高价格
      */
+    @ApiModelProperty("最高价格")
     private Integer maxPrice;
 
     /**
      * 备注
      */
+    @ApiModelProperty("备注（推荐理由）")
     private String remark;
 
     /**
