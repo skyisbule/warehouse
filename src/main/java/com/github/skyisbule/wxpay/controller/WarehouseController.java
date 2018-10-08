@@ -115,6 +115,18 @@ public class WarehouseController {
         return warehouseUnitMapper.selectByExample(e);
     }
 
+    @ApiOperation("通过仓库id拿到详细信息")
+    @RequestMapping("/get-detail-by-wid")
+    public WarehouseWithUnitVO getDetail(int wid){
+        WarehouseWithUnitVO vo = new WarehouseWithUnitVO();
+        vo.setWarehouse(warehouseMapper.selectByPrimaryKey(wid));
+        WarehouseUnitExample e = new WarehouseUnitExample();
+        e.createCriteria()
+                .andWarehouseIdEqualTo(wid);
+        vo.setUnits(warehouseUnitMapper.selectByExample(e));
+        return vo;
+    }
+
     @ApiOperation("添加一条仓库信息")
     @RequestMapping("add")
     public synchronized String add(WarehouseWithUnitVO vo){

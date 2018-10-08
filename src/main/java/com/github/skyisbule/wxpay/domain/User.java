@@ -45,6 +45,11 @@ public class User implements Serializable {
      */
     private String company;
 
+    /**
+     * 头像
+     */
+    private String headPic;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getUid() {
@@ -119,6 +124,14 @@ public class User implements Serializable {
         this.company = company;
     }
 
+    public String getHeadPic() {
+        return headPic;
+    }
+
+    public void setHeadPic(String headPic) {
+        this.headPic = headPic;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -139,7 +152,8 @@ public class User implements Serializable {
             && (this.getTelNum() == null ? other.getTelNum() == null : this.getTelNum().equals(other.getTelNum()))
             && (this.getEmail() == null ? other.getEmail() == null : this.getEmail().equals(other.getEmail()))
             && (this.getLocate() == null ? other.getLocate() == null : this.getLocate().equals(other.getLocate()))
-            && (this.getCompany() == null ? other.getCompany() == null : this.getCompany().equals(other.getCompany()));
+            && (this.getCompany() == null ? other.getCompany() == null : this.getCompany().equals(other.getCompany()))
+            && (this.getHeadPic() == null ? other.getHeadPic() == null : this.getHeadPic().equals(other.getHeadPic()));
     }
 
     @Override
@@ -155,6 +169,7 @@ public class User implements Serializable {
         result = prime * result + ((getEmail() == null) ? 0 : getEmail().hashCode());
         result = prime * result + ((getLocate() == null) ? 0 : getLocate().hashCode());
         result = prime * result + ((getCompany() == null) ? 0 : getCompany().hashCode());
+        result = prime * result + ((getHeadPic() == null) ? 0 : getHeadPic().hashCode());
         return result;
     }
 
@@ -173,6 +188,7 @@ public class User implements Serializable {
         sb.append(", email=").append(email);
         sb.append(", locate=").append(locate);
         sb.append(", company=").append(company);
+        sb.append(", headPic=").append(headPic);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
