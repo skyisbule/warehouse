@@ -65,3 +65,8 @@ swagger:
       code : 500
       message: server error
       modelRef: error
+
+qiniu:
+  accessKey: dcNxos-8d9hb222GRRyI5dWlsMI0hARssZA_Bspn
+  secretKey:
+  bucket: warehouse
