@@ -90,6 +90,20 @@ public class RequireController {
     @ApiOperation("修改需求信息")
     @RequestMapping("/update")
     public String update(Require require){
+        Require old = requireMapper.selectByPrimaryKey(require.getRid());
+        require.setOpenId(old.getOpenId());
+        requireMapper.updateByPrimaryKey(require);
+        return "{\"errorNo\":\"0\",\"errorInfo\":\"执行成功\",\"results\":{\"data\":[]}}";
+    }
+
+    @ApiOperation("控制需求是否通过")
+    @RequestMapping("/pass")
+    public String access(int pass,int rid){
+        Require require = requireMapper.selectByPrimaryKey(rid);
+        if (pass == 1)
+            require.setStatus(1);
+        else
+            require.setStatus(2);
         requireMapper.updateByPrimaryKey(require);
         return "{\"errorNo\":\"0\",\"errorInfo\":\"执行成功\",\"results\":{\"data\":[]}}";
     }

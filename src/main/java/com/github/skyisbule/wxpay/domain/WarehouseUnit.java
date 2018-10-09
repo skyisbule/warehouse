@@ -35,6 +35,11 @@ public class WarehouseUnit implements Serializable {
 
     private Integer warehouseId;
 
+    /**
+     * 楼层
+     */
+    private String floor;
+
     private static final long serialVersionUID = 1L;
 
     public Integer getWuid() {
@@ -93,6 +98,14 @@ public class WarehouseUnit implements Serializable {
         this.warehouseId = warehouseId;
     }
 
+    public String getFloor() {
+        return floor;
+    }
+
+    public void setFloor(String floor) {
+        this.floor = floor;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -111,7 +124,8 @@ public class WarehouseUnit implements Serializable {
             && (this.getMinSubletArea() == null ? other.getMinSubletArea() == null : this.getMinSubletArea().equals(other.getMinSubletArea()))
             && (this.getPrice() == null ? other.getPrice() == null : this.getPrice().equals(other.getPrice()))
             && (this.getSupportingFacilities() == null ? other.getSupportingFacilities() == null : this.getSupportingFacilities().equals(other.getSupportingFacilities()))
-            && (this.getWarehouseId() == null ? other.getWarehouseId() == null : this.getWarehouseId().equals(other.getWarehouseId()));
+            && (this.getWarehouseId() == null ? other.getWarehouseId() == null : this.getWarehouseId().equals(other.getWarehouseId()))
+            && (this.getFloor() == null ? other.getFloor() == null : this.getFloor().equals(other.getFloor()));
     }
 
     @Override
@@ -125,6 +139,7 @@ public class WarehouseUnit implements Serializable {
         result = prime * result + ((getPrice() == null) ? 0 : getPrice().hashCode());
         result = prime * result + ((getSupportingFacilities() == null) ? 0 : getSupportingFacilities().hashCode());
         result = prime * result + ((getWarehouseId() == null) ? 0 : getWarehouseId().hashCode());
+        result = prime * result + ((getFloor() == null) ? 0 : getFloor().hashCode());
         return result;
     }
 
@@ -141,6 +156,7 @@ public class WarehouseUnit implements Serializable {
         sb.append(", price=").append(price);
         sb.append(", supportingFacilities=").append(supportingFacilities);
         sb.append(", warehouseId=").append(warehouseId);
+        sb.append(", floor=").append(floor);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -105,24 +105,21 @@ public class WarehouseUnitExample {
 
         protected void addCriterion(String condition) {
             if (condition == null) {
-                //throw new RuntimeException("Value for condition cannot be null");
-                return ;
+                throw new RuntimeException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
         }
 
         protected void addCriterion(String condition, Object value, String property) {
             if (value == null) {
-                //throw new RuntimeException("Value for " + property + " cannot be null");
-                return ;
+                throw new RuntimeException("Value for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value));
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
             if (value1 == null || value2 == null) {
-                //throw new RuntimeException("Between values for " + property + " cannot be null");
-                return;
+                throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
         }
@@ -554,6 +551,76 @@ public class WarehouseUnitExample {
 
         public Criteria andWarehouseIdNotBetween(Integer value1, Integer value2) {
             addCriterion("warehouse_id not between", value1, value2, "warehouseId");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorIsNull() {
+            addCriterion("floor is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorIsNotNull() {
+            addCriterion("floor is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorEqualTo(String value) {
+            addCriterion("floor =", value, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorNotEqualTo(String value) {
+            addCriterion("floor <>", value, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorGreaterThan(String value) {
+            addCriterion("floor >", value, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorGreaterThanOrEqualTo(String value) {
+            addCriterion("floor >=", value, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorLessThan(String value) {
+            addCriterion("floor <", value, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorLessThanOrEqualTo(String value) {
+            addCriterion("floor <=", value, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorLike(String value) {
+            addCriterion("floor like", value, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorNotLike(String value) {
+            addCriterion("floor not like", value, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorIn(List<String> values) {
+            addCriterion("floor in", values, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorNotIn(List<String> values) {
+            addCriterion("floor not in", values, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorBetween(String value1, String value2) {
+            addCriterion("floor between", value1, value2, "floor");
+            return (Criteria) this;
+        }
+
+        public Criteria andFloorNotBetween(String value1, String value2) {
+            addCriterion("floor not between", value1, value2, "floor");
             return (Criteria) this;
         }
     }

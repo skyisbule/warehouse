@@ -153,6 +153,18 @@ public class WarehouseController {
         return "{\"errorNo\":\"0\",\"errorInfo\":\"执行成功\",\"results\":{\"data\":[]}}";
     }
 
+    @ApiOperation("控制是否通过")
+    @RequestMapping("/pass")
+    public String access(int pass,int wid){
+        Warehouse warehouse = warehouseMapper.selectByPrimaryKey(wid);
+        if (pass == 1)
+            warehouse.setStatus(1);
+        else
+            warehouse.setStatus(2);
+        warehouseMapper.updateByPrimaryKey(warehouse);
+        return "{\"errorNo\":\"0\",\"errorInfo\":\"执行成功\",\"results\":{\"data\":[]}}";
+    }
+
     @ApiOperation("修改存储单元")
     @RequestMapping("/update-unit")
     public String updateUtil(@RequestBody List<WarehouseUnit> units){
