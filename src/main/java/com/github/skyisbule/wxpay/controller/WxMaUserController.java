@@ -7,6 +7,7 @@ import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import cn.hutool.json.JSONUtil;
 import com.github.skyisbule.wxpay.dao.UserMapper;
 import com.github.skyisbule.wxpay.domain.User;
+import com.github.skyisbule.wxpay.service.UserService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -29,6 +30,8 @@ public class WxMaUserController {
     @Autowired
     private WxMaService wxService;
 
+    @Autowired
+    private UserService userService;
 
     /**
      * 登陆接口
@@ -44,9 +47,10 @@ public class WxMaUserController {
             this.logger.info(session.getSessionKey());
             this.logger.info(session.getOpenid());
             //插入用户
-
-
-            return "";
+            User user = new User();
+            user.setOpenId(session.getOpenid());
+            userService.insertUser(user);
+            return "{\"openId\":\""+session.getOpenid()+"\"";
             //return JsonUtils.toJson(session);
         } catch (WxErrorException e) {
             this.logger.error(e.getMessage(), e);

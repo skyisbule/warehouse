@@ -25,4 +25,11 @@ public class Uploader {
         return upToken;
     }
 
+    @RequestMapping("/qiniu/simple")
+    public String simpleToken(){
+        Auth auth = Auth.create(accessKey, secretKey);
+        String upToken = auth.uploadToken(bucket);
+        return upToken;
+    }
+
 }

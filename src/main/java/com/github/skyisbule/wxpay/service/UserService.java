@@ -19,4 +19,10 @@ public class UserService {
         return mapper.selectByExample(e).get(0);
     }
 
+    public void insertUser(User user){
+        if (user==null || user.getOpenId()==null)
+            return;
+        mapper.insert(user);
+    }
+
 }
