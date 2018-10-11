@@ -89,7 +89,7 @@ public class WarehouseController {
         if(status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status)
-                    .andLocateLike(city)
+                    .andLocateLike( "%" + city + "%")
                     .andOpenIdEqualTo(openId);
         }
         List<Warehouse> warehouses =  warehouseMapper.selectByExample(e);
@@ -129,7 +129,7 @@ public class WarehouseController {
 
     @ApiOperation("添加一条仓库信息")
     @RequestMapping("add")
-    public synchronized String add(WarehouseWithUnitVO vo){
+    public synchronized String add(@RequestBody WarehouseWithUnitVO vo){
         //todo 这里对数据做一下校验
         String result = "{\"code\":200}";
         try {

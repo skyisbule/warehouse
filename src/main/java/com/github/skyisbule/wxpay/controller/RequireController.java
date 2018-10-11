@@ -56,7 +56,7 @@ public class RequireController {
         if (status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status)
-                    .andLocatesLike(city)
+                    .andLocatesLike("%"+city+"%")
                     .andOpenIdEqualTo(openId);
         }
         List<Require> list = requireMapper.selectByExample(e);

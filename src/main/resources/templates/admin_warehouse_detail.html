@@ -153,6 +153,7 @@
                 price : "",
                 supportingFacilities : "",
                 warehouseId: GetRequest("wid")
+                floor : ''
             };
             obj.area = $(tagElements[j]).find(".area").val();
             obj.couldSublet = $(tagElements[j]).find(".couldSublet").val();
@@ -166,6 +167,7 @@
             obj.minSubletArea = $(tagElements[j]).find(".minSubletArea").val();
             obj.price = $(tagElements[j]).find(".price").val();
             obj.supportingFacilities = $(tagElements[j]).find(".supportingFacilities").val();
+            obj.floor = $(tagElements[j]).find(".floor").val();
             objs.push(obj);
         }
         let jsons = JSON.stringify(objs);
