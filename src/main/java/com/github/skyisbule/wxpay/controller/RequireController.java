@@ -36,7 +36,7 @@ public class RequireController {
         if (status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status)
-                    .andLocatesLike(city);
+                    .andLocatesLike("%"+city+"%");
         }
         return (int)requireMapper.countByExample(e);
     }
@@ -57,6 +57,10 @@ public class RequireController {
             e.createCriteria()
                     .andStatusEqualTo(status)
                     .andLocatesLike("%"+city+"%")
+                    .andOpenIdEqualTo(openId);
+        }
+        if(status == 5){
+            e.createCriteria()
                     .andOpenIdEqualTo(openId);
         }
         List<Require> list = requireMapper.selectByExample(e);

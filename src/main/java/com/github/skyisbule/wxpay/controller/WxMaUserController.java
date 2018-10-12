@@ -49,8 +49,9 @@ public class WxMaUserController {
             //插入用户
             User user = new User();
             user.setOpenId(session.getOpenid());
-            userService.insertUser(user);
-            return "{\"openId\":\""+session.getOpenid()+"\"";
+            if (userService.countUserByOpenId(session.getOpenid()) == 0)
+                userService.insertUser(user);
+            return "{\"openId\":\""+session.getOpenid()+"\"}";
             //return JsonUtils.toJson(session);
         } catch (WxErrorException e) {
             this.logger.error(e.getMessage(), e);

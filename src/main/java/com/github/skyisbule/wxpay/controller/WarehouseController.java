@@ -69,7 +69,7 @@ public class WarehouseController {
         if(status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status)
-                    .andLocateLike(city);
+                    .andLocateLike("%"+city+"%");
         }
         return (int)warehouseMapper.countByExample(e);
     }
@@ -90,6 +90,10 @@ public class WarehouseController {
             e.createCriteria()
                     .andStatusEqualTo(status)
                     .andLocateLike( "%" + city + "%")
+                    .andOpenIdEqualTo(openId);
+        }
+        if(status == 5){
+            e.createCriteria()
                     .andOpenIdEqualTo(openId);
         }
         List<Warehouse> warehouses =  warehouseMapper.selectByExample(e);
