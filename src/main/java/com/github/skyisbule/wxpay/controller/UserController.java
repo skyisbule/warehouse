@@ -59,7 +59,10 @@ public class UserController {
 
     @ResponseBody
     @RequestMapping("/count-all-user")
-    public Integer count(){
+    public Integer count(@ApiParam("真实名称")String realName,
+                         @ApiParam("昵称")String nickName,
+                         @ApiParam("公司名")String company,
+                         @ApiParam("手机号")String telNum){
         UserExample e = new UserExample();
         e.createCriteria()
                 .andOpenIdIsNotNull();
@@ -69,12 +72,24 @@ public class UserController {
     @RequestMapping("/get-by-page")
     @ResponseBody
     public Result getByPage(@ApiParam("必填：页码号，从1开始") int pageNum,
-                                @ApiParam("一页返回多少数据，不填的话默认为10")Integer pageSize){
+                            @ApiParam("一页返回多少数据，不填的话默认为10")Integer pageSize,
+                            @ApiParam("真实名称")String realName,
+                            @ApiParam("昵称")String nickName,
+                            @ApiParam("公司名")String company,
+                            @ApiParam("手机号")String telNum){
+        if (realName==null) realName = "";
+        if (nickName==null) nickName = "";
+        if (company==null)  company = "";
+        if (telNum==null)   telNum = "";
         UserExample e = new UserExample();
         e.setLimit(pageSize);
         e.setOffset((pageNum-1)*10);
         e.createCriteria()
-                .andOpenIdIsNotNull();
+                .andOpenIdIsNotNull()
+                .andRealNameLike("%"+realName+"%")
+                .andNickNameLike("%"+nickName+"%")
+                .andTelNumLike("%"+telNum+"%")
+                .andCompanyLike("%"+company+"%");
         List<User> list =  userMapper.selectByExample(e);
         HashMap<String,Object> map = new HashMap<>();
         Result result = new Result();
@@ -82,7 +97,7 @@ public class UserController {
         map.put("list",list);
         map.put("pageNum",pageNum+1);
         map.put("pageSize",pageSize);
-        int total = this.count();
+        int total = this.count(realName,nickName,company,telNum);
         map.put("pages",total/pageSize);
         map.put("total",total);
         result.setResults("data",map);

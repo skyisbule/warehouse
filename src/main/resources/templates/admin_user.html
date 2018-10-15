@@ -14,9 +14,41 @@
     <script type="text/javascript" src="/table/plugins/frame/js/fs.js?v=1.7.0"></script>
     <script type="text/javascript" src="/table/plugins/frame/js/frame.js?v=1.7.0"></script>
 </head>
-
-<table id="fsDatagrid" lay-filter="fsDatagrid" class="fsDatagrid" isLoad="1" url="/api/user/get-by-page" isPage="1" sortType="1" pageSize="10" defaultForm="query_form" height="full-135"></table>
-
+<form class="layui-form" id="query_form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-mid">真实姓名：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="tel" name="realName" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">昵称：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="tel" name="nickName" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">手机号：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="telNum" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">公司：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="company" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <button class="layui-btn" type="button" function="query"><i class="layui-icon">&#xe615;</i>查询</button>
+            </div>
+        </div>
+    </div>
+</form>
+<table id="fsDatagrid" lay-filter="fsDatagrid" class="fsDatagrid" isLoad="1" url="/api/user/get-by-page" isPage="1"
+       sortType="1" pageSize="10" defaultForm="query_form" height="full-135"></table>
 <div class="fsDatagridCols">
     <p type="numbers" title="#"/>
     <p checkbox="true"/>
@@ -27,7 +59,7 @@
     <p field="company" title="公司" width="100"/>
     <p field="nickName" title="昵称" width="120"/>
     <p field="sex" title="性别" width="80"/>
-    <p field="email" title="邮箱" width="100" />
+    <p field="email" title="邮箱" width="100"/>
     <p field="locate" title="位置" width="100"/>
     <p field="headPic" title="头像" width="150"/>
 
@@ -36,7 +68,8 @@
 
 <script type="text/html" id="barDemo">
 
-    <a class="layui-btn layui-btn-xs" lay-event="top" topUrl="/admin_user_detail" topWidth="800px" topHeight="600px" topTitle="编辑页面" inputs="uid:">编辑</a>
+    <a class="layui-btn layui-btn-xs" lay-event="top" topUrl="/admin_user_detail" topWidth="800px" topHeight="600px"
+       topTitle="编辑页面" inputs="uid:">编辑</a>
 
 </script>
 

@@ -105,21 +105,24 @@ public class UserExample {
 
         protected void addCriterion(String condition) {
             if (condition == null) {
-                throw new RuntimeException("Value for condition cannot be null");
+                //throw new RuntimeException("Value for condition cannot be null");
+                return ;
             }
             criteria.add(new Criterion(condition));
         }
 
         protected void addCriterion(String condition, Object value, String property) {
             if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
+                //throw new RuntimeException("Value for condition cannot be null");
+                return ;
             }
             criteria.add(new Criterion(condition, value));
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
             if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
+                //throw new RuntimeException("Value for condition cannot be null");
+                return ;
             }
             criteria.add(new Criterion(condition, value1, value2));
         }
@@ -295,7 +298,8 @@ public class UserExample {
         }
 
         public Criteria andRealNameLike(String value) {
-            addCriterion("real_name like", value, "realName");
+            if (!value.equals("%%"))
+               addCriterion("real_name like", value, "realName");
             return (Criteria) this;
         }
 
@@ -365,7 +369,8 @@ public class UserExample {
         }
 
         public Criteria andNickNameLike(String value) {
-            addCriterion("nick_name like", value, "nickName");
+            if(!value.equals("%%"))
+                addCriterion("nick_name like", value, "nickName");
             return (Criteria) this;
         }
 
@@ -505,7 +510,8 @@ public class UserExample {
         }
 
         public Criteria andTelNumLike(String value) {
-            addCriterion("tel_num like", value, "telNum");
+            if(!value.equals("%%"))
+                addCriterion("tel_num like", value, "telNum");
             return (Criteria) this;
         }
 
@@ -715,7 +721,8 @@ public class UserExample {
         }
 
         public Criteria andCompanyLike(String value) {
-            addCriterion("company like", value, "company");
+            if(!value.equals("%%"))
+                addCriterion("company like", value, "company");
             return (Criteria) this;
         }
 
