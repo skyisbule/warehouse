@@ -229,7 +229,8 @@ public class WarehouseExample {
         }
 
         public Criteria andLocateLike(String value) {
-            addCriterion("locate like", value, "locate");
+            if (!value.equals("%%"))
+                addCriterion("locate like", value, "locate");
             return (Criteria) this;
         }
 
@@ -709,7 +710,8 @@ public class WarehouseExample {
         }
 
         public Criteria andRemarkLike(String value) {
-            addCriterion("remark like", value, "remark");
+            if (!value.equals("%%"))
+                addCriterion("remark like", value, "remark");
             return (Criteria) this;
         }
 

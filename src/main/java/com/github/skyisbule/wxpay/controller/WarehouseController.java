@@ -15,7 +15,10 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -36,7 +39,21 @@ public class WarehouseController {
     public Result getSimpleByPage(@ApiParam("从一开始") int pageNum,
                                   @ApiParam("城市")String city,
                                   @ApiParam("状态为5则为全部") int status,
-                                  @ApiParam("一页返回多少数据，不填默认10")Integer pageSize){
+                                  @ApiParam("一页返回多少数据，不填默认10")Integer pageSize,
+                                  @ApiParam("高级搜索的状态")Integer superStatus,
+                                  @ApiParam("备注")String remark,
+                                  @ApiParam("创建时间")String createDate) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date begin = sdf.parse("2018-1-1 00:00:00");
+        Date end   = new Date();
+        if (createDate!=null){
+            String[] strs = createDate.split(" - ");
+            begin = sdf.parse(strs[0]+" 00:00:00");
+            end   = sdf.parse(strs[1]+" 00:00:00");
+        }
+        if (superStatus!=null) status = superStatus;
+        if(city==null) city = "";
+        if (remark==null) remark = "";
         if(pageSize==null) pageNum = 10;
         WarehouseExample e = new WarehouseExample();
         e.setOffset(10*(pageNum-1));
@@ -45,7 +62,14 @@ public class WarehouseController {
         if(status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status)
-                    .andLocateLike(city);
+                    .andLocateLike("%"+city+"%")
+                    .andRemarkLike("%"+remark+"%")
+                    .andCreateTimeBetween(begin,end);
+        }else {
+            e.createCriteria()
+                    .andLocateLike("%"+city+"%")
+                    .andRemarkLike("%"+remark+"%")
+                    .andCreateTimeBetween(begin,end);
         }
         List<Warehouse> list =  warehouseMapper.selectByExample(e);
         HashMap<String,Object> map = new HashMap<>();

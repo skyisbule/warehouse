@@ -14,7 +14,39 @@
     <script type="text/javascript" src="/table/plugins/frame/js/fs.js?v=1.7.0"></script>
     <script type="text/javascript" src="/table/plugins/frame/js/frame.js?v=1.7.0"></script>
 </head>
-
+<form class="layui-form" id="query_form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-mid">状态(0未处理 1已通过 2未通过 5全部)：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="tel" name="superStatus" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">位置：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="tel" name="city" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">备注：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="remark" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">创建时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="createDate" autocomplete="off" class="layui-input fsDate" daterange="1" placeholder=" - " lay-key="1">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <div class="layui-input-inline">
+                <button class="layui-btn" type="button" function="query"><i class="layui-icon">&#xe615;</i>查询</button>
+            </div>
+        </div>
+    </div>
+</form>
 <table id="fsDatagrid" lay-filter="fsDatagrid" class="fsDatagrid" isLoad="1" url="/api/warehouse/get-warehouse-simple-by-page?status=5" isPage="1" sortType="1" pageSize="10" defaultForm="query_form" height="full-135"></table>
 
 <div class="fsDatagridCols">
@@ -22,19 +54,19 @@
     <p checkbox="true"/>
     <p field="wid" title="ID" width="60" sort="true"/>
     <p field="status" title="状态" width="100"/>
-    <p field="locate" title="位置" width="150"/>
-    <p field="parkService" title="园区服务" width="80"/>
-    <p field="suitableFor" title="适合行业" width="100"/>
-    <p field="advantage" title="优势" width="100" />
-    <p field="remark" title="备注" width="100"/>
+    <p field="locate" title="位置" width="180"/>
+    <p field="parkService" title="园区服务" width="180"/>
+    <p field="suitableFor" title="适合行业" width="180"/>
+    <p field="advantage" title="优势" width="180" />
+    <p field="remark" title="备注" width="150"/>
     <p field="createTime" title="创建时间" width="150"/>
-    <p fixed="right" align="center" toolbar="#barDemo" title="操作" width="220"/>
+    <p fixed="right" align="center" toolbar="#barDemo" title="操作" width="260"/>
 </div>
 
 <script type="text/html" id="barDemo">
     <a class="layui-btn layui-btn-xs" lay-event="top" topUrl="/admin_warehouse_detail" topWidth="800px" topHeight="600px" topTitle="编辑页面" inputs="wid:,openId">编辑</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="submit" url="/api/warehouse/pass?pass=1" isConfirm="1" confirmMsg="是否确定通过当前记录？它将被展示到前台" inputs="wid:">pass</a>
-    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="submit" url="/api/warehouse/pass?pass=2" isConfirm="1" confirmMsg="确定拒绝通过当前记录？它将不被展示到前台" inputs="wid:">no</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="submit" url="/api/warehouse/pass?pass=1" isConfirm="1" confirmMsg="是否确定通过当前记录？它将被展示到前台" inputs="wid:">通过</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="submit" url="/api/warehouse/pass?pass=2" isConfirm="1" confirmMsg="确定拒绝通过当前记录？它将不被展示到前台" inputs="wid:">不通过</a>
     <a class="layui-btn layui-btn-xs" lay-event="top" topUrl="admin_warehouse_picture" topWidth="800px" topHeight="600px" topTitle="查看图片" inputs="wid:">图片</a>
     <a class="layui-btn layui-btn-xs" lay-event="top" topUrl="/admin_communication_record" topWidth="800px" topHeight="600px" topTitle="沟通页面" inputs="wid:">沟通</a>
 </script>
