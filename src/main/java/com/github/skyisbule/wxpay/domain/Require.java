@@ -1,79 +1,62 @@
 package com.github.skyisbule.wxpay.domain;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
 /**
  * @author 
  */
-@ApiModel("需求的实体")
 public class Require implements Serializable {
-    @ApiModelProperty("主键id，添加的接口不需要传")
     private Integer rid;
 
     /**
      * 位置
      */
-    @ApiModelProperty("地理位置，若有多个则以空格作为分隔符")
     private String locates;
 
     /**
      * 面积
      */
-    @ApiModelProperty("面积")
     private Integer area;
 
     /**
      * 用途
      */
-    @ApiModelProperty("用途")
     private String purpose;
 
     /**
      * 消防需求
      */
-    @ApiModelProperty("消防需求")
     private String fireControlRequire;
 
     /**
      * 月台需求
      */
-    @ApiModelProperty("月台需求")
     private String platformRequire;
 
     /**
      * 楼层要求
      */
-    @ApiModelProperty("楼层需求")
     private String floorRequire;
 
     /**
      * 需求时间
      */
-    @ApiModelProperty("提交这条需求的时间")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date requireTime;
 
     /**
      * 租期
      */
-    @ApiModelProperty("租期")
     private String leaseTerm;
 
     /**
      * 最高价格
      */
-    @ApiModelProperty("最高价格")
     private Integer maxPrice;
 
     /**
      * 备注
      */
-    @ApiModelProperty("备注（推荐理由）")
     private String remark;
 
     /**
@@ -85,6 +68,11 @@ public class Require implements Serializable {
      * 发布者id
      */
     private String openId;
+
+    /**
+     * 创建这条记录的时间
+     */
+    private Date createTime;
 
     private static final long serialVersionUID = 1L;
 
@@ -192,6 +180,14 @@ public class Require implements Serializable {
         this.openId = openId;
     }
 
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -216,7 +212,8 @@ public class Require implements Serializable {
             && (this.getMaxPrice() == null ? other.getMaxPrice() == null : this.getMaxPrice().equals(other.getMaxPrice()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getOpenId() == null ? other.getOpenId() == null : this.getOpenId().equals(other.getOpenId()));
+            && (this.getOpenId() == null ? other.getOpenId() == null : this.getOpenId().equals(other.getOpenId()))
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
     }
 
     @Override
@@ -236,6 +233,7 @@ public class Require implements Serializable {
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getOpenId() == null) ? 0 : getOpenId().hashCode());
+        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
         return result;
     }
 
@@ -258,6 +256,7 @@ public class Require implements Serializable {
         sb.append(", remark=").append(remark);
         sb.append(", status=").append(status);
         sb.append(", openId=").append(openId);
+        sb.append(", createTime=").append(createTime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

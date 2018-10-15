@@ -106,8 +106,8 @@ public class RequireExample {
 
         protected void addCriterion(String condition) {
             if (condition == null) {
-                //throw new RuntimeException("Value for condition cannot be null");
-                return;
+                //throw new RuntimeException("Value for " + property + " cannot be null");
+                return ;
             }
             criteria.add(new Criterion(condition));
         }
@@ -122,8 +122,8 @@ public class RequireExample {
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
             if (value1 == null || value2 == null) {
-                //throw new RuntimeException("Between values for " + property + " cannot be null");
-                return;
+                //throw new RuntimeException("Value for " + property + " cannot be null");
+                return ;
             }
             criteria.add(new Criterion(condition, value1, value2));
         }
@@ -229,7 +229,8 @@ public class RequireExample {
         }
 
         public Criteria andLocatesLike(String value) {
-            addCriterion("locates like", value, "locates");
+            if (!value.equals("%%"))
+                addCriterion("locates like", value, "locates");
             return (Criteria) this;
         }
 
@@ -359,7 +360,8 @@ public class RequireExample {
         }
 
         public Criteria andPurposeLike(String value) {
-            addCriterion("purpose like", value, "purpose");
+            if (!value.equals("%%"))
+                addCriterion("purpose like", value, "purpose");
             return (Criteria) this;
         }
 
@@ -985,6 +987,66 @@ public class RequireExample {
 
         public Criteria andOpenIdNotBetween(String value1, String value2) {
             addCriterion("open_id not between", value1, value2, "openId");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNull() {
+            addCriterion("create_time is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIsNotNull() {
+            addCriterion("create_time is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeEqualTo(Date value) {
+            addCriterion("create_time =", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotEqualTo(Date value) {
+            addCriterion("create_time <>", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThan(Date value) {
+            addCriterion("create_time >", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("create_time >=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThan(Date value) {
+            addCriterion("create_time <", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeLessThanOrEqualTo(Date value) {
+            addCriterion("create_time <=", value, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeIn(List<Date> values) {
+            addCriterion("create_time in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotIn(List<Date> values) {
+            addCriterion("create_time not in", values, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeBetween(Date value1, Date value2) {
+            addCriterion("create_time between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
+            addCriterion("create_time not between", value1, value2, "createTime");
             return (Criteria) this;
         }
     }

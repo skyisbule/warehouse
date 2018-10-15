@@ -1,5 +1,6 @@
 package com.github.skyisbule.wxpay.controller;
 
+import cn.hutool.bloomfilter.filter.SDBMFilter;
 import com.github.skyisbule.wxpay.dao.RequireMapper;
 import com.github.skyisbule.wxpay.domain.Require;
 import com.github.skyisbule.wxpay.domain.RequireExample;
@@ -15,7 +16,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
@@ -48,7 +52,57 @@ public class RequireController {
                             @ApiParam("城市名称")String city,
                             @ApiParam("状态为5则为全部") int status,
                             @ApiParam("一页返回多少数据，不填的话默认为10")Integer pageSize,
-                            @ApiParam("用户的openid")String openId){
+                            @ApiParam("用户的openid")String openId,
+                            @ApiParam("创建时间") String createTime,
+                            @ApiParam("需求时间")String requireTime,
+                            @ApiParam("面积 用-隔开")String areas,
+                            @ApiParam("价格 用-隔开")String price,
+                            @ApiParam("用途")String purpose,
+                            @ApiParam("高级搜索状态")Integer superStatus) throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date createTimeBegin  = sdf.parse("2017-11-11 00:00:00");
+        Date createTimeEnd    = new Date();
+        Date requireTimeBegin = sdf.parse("2017-11-11 00:00:00");
+        Date requireTimeEnd   = sdf.parse("2100-11-11 00:00:00");
+        if (createTime!=null){
+            if(createTime.indexOf("-")>0) {
+                String strs[] = createTime.split(" - ");
+                createTimeBegin = sdf.parse(strs[0] + " 00:00:00");
+                createTimeEnd = sdf.parse(strs[1] + " 00:00:00");
+            }
+        }
+        if (requireTime!=null){
+            if(requireTime.length()>6) {
+                String strs[] = requireTime.split(" - ");
+                requireTimeBegin = sdf.parse(strs[0] + " 00:00:00");
+                requireTimeEnd = sdf.parse(strs[1] + " 00:00:00");
+            }
+        }
+
+        int priceBegin = 0;
+        int priceEnd   = 999999999;
+        if (price!=null){
+            if (price.length()>2) {
+                String strs[] = price.split("-");
+                priceBegin = Integer.parseInt(strs[0]);
+                priceEnd = Integer.parseInt(strs[1]);
+            }
+        }
+
+        int areaBegin = 0;
+        int areaEnd   = 999999999;
+        if (areas!=null){
+            if (areas.indexOf("-")>1) {
+                String strs[] = areas.split("-");
+                areaBegin = Integer.parseInt(strs[0]);
+                areaEnd = Integer.parseInt(strs[1]);
+            }
+        }
+        if (city==null) city="";
+        if (purpose==null) purpose="";
+        if (superStatus!=null) status = superStatus;
+
         if(pageSize==null) pageNum = 10;
         RequireExample e = new RequireExample();
         e.setOffset(10*(pageNum-1));
@@ -58,11 +112,22 @@ public class RequireController {
             e.createCriteria()
                     .andStatusEqualTo(status)
                     .andLocatesLike("%"+city+"%")
-                    .andOpenIdEqualTo(openId);
+                    .andOpenIdEqualTo(openId)
+                    .andCreateTimeBetween(createTimeBegin,createTimeEnd)
+                    .andRequireTimeBetween(requireTimeBegin,requireTimeEnd)
+                    .andAreaBetween(areaBegin,areaEnd)
+                    .andMaxPriceBetween(priceBegin,priceEnd)
+                    .andPurposeLike("%"+purpose+"%");
         }
         if(status == 5){
             e.createCriteria()
-                    .andOpenIdEqualTo(openId);
+                    .andLocatesLike("%"+city+"%")
+                    .andOpenIdEqualTo(openId)
+                    .andCreateTimeBetween(createTimeBegin,createTimeEnd)
+                    .andRequireTimeBetween(requireTimeBegin,requireTimeEnd)
+                    .andAreaBetween(areaBegin,areaEnd)
+                    .andMaxPriceBetween(priceBegin,priceEnd)
+                    .andPurposeLike("%"+purpose+"%");
         }
         List<Require> list = requireMapper.selectByExample(e);
         List<RequireWithContactVO> vos = new ArrayList<>();
@@ -116,6 +181,7 @@ public class RequireController {
     @ApiOperation("添加一条需求")
     @RequestMapping("/add")
     public String add(Require require){
+        require.setCreateTime(new Date());
         requireMapper.insert(require);
         return "success";
     }
