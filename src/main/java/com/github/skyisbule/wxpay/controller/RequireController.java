@@ -3,6 +3,7 @@ package com.github.skyisbule.wxpay.controller;
 import com.github.skyisbule.wxpay.dao.RequireMapper;
 import com.github.skyisbule.wxpay.domain.Require;
 import com.github.skyisbule.wxpay.domain.RequireExample;
+import com.github.skyisbule.wxpay.domain.User;
 import com.github.skyisbule.wxpay.result.Result;
 import com.github.skyisbule.wxpay.service.UserService;
 import com.github.skyisbule.wxpay.vo.RequireWithContactVO;
@@ -117,6 +118,14 @@ public class RequireController {
     public String add(Require require){
         requireMapper.insert(require);
         return "success";
+    }
+
+    @ApiOperation("通过需求id获取发这条信息的用户详情信息")
+    @RequestMapping("/get-user-by-rid")
+    public User getUserByRid(int rid){
+        Require require = new Require();
+        require = requireMapper.selectByPrimaryKey(rid);
+        return userService.getByOpenId(require.getOpenId());
     }
 
 }

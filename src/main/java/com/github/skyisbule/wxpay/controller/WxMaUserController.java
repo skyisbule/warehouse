@@ -1,12 +1,17 @@
 package com.github.skyisbule.wxpay.controller;
 
+import cn.binarywang.wx.miniapp.api.WxMaQrcodeService;
 import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.bean.WxMaCodeLineColor;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaPhoneNumberInfo;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
+import cn.hutool.core.io.FileUtil;
+import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
 import com.github.skyisbule.wxpay.dao.UserMapper;
 import com.github.skyisbule.wxpay.domain.User;
+import com.github.skyisbule.wxpay.service.QiniuService;
 import com.github.skyisbule.wxpay.service.UserService;
 import me.chanjar.weixin.common.error.WxErrorException;
 import org.apache.commons.lang3.StringUtils;
@@ -16,6 +21,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import sun.misc.BASE64Decoder;
+
+import java.io.*;
+import java.util.HashMap;
 
 /**
  * 微信小程序用户接口
@@ -32,6 +41,37 @@ public class WxMaUserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private QiniuService qiniuService;
+
+   // @Autowired
+   // private WxMaQrcodeService qrcodeService;
+
+    @RequestMapping("/getAccessToken")
+    public String getToken() throws WxErrorException {
+        return wxService.getAccessToken();
+    }
+
+
+
+    @RequestMapping("/createCodeRequire")
+    public String createCodeRequire(int rid) throws WxErrorException {
+        File file = wxService.getQrcodeService().createWxaCodeUnlimit(
+                String.valueOf(rid),
+                "pages/needDetail/needDetail"
+                  );
+        return qiniuService.doUpload(file.getPath());
+    }
+
+    @RequestMapping("/createCodeWarehouse")
+    public String createCodeWarehouse(int wid) throws WxErrorException {
+        File file = wxService.getQrcodeService().createWxaCodeUnlimit(
+                String.valueOf(wid),
+                "pages/warehouseDetail/warehouseDetail"
+        );
+        return qiniuService.doUpload(file.getPath());
+    }
 
     /**
      * 登陆接口
