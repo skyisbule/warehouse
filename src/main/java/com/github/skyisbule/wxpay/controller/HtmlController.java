@@ -30,6 +30,9 @@ public class HtmlController {
     @RequestMapping("/admin_warehouse_picture")
     public String admin_warehouse_picture(){return "admin_warehouse_picture";}
 
+    @RequestMapping("/admin_communication_record")
+    public String admin_communication_record(){return "admin_communication_record";}
+
     @RequestMapping("/index")
     public String index(){return "index";}
 

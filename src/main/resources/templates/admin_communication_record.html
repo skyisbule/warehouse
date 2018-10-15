@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>wangEditor demo list</title>
+    <style type="text/css">
+        .body {
+            width: 800px;
+            margin: 0 auto 0 auto;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+</head>
+<body>
+
+<div id="body" class='body'>
+
+</div>
+<button id = 'sbtbutton' onclick="submit()" sourceId="" type="">保存</button>
+
+<!-- 引用js -->
+<script type="text/javascript" src="http://unpkg.com/wangeditor/release/wangEditor.min.js"></script>
+<script type="text/javascript">
+    let E = window.wangEditor;
+    var editor = new E('#body');
+    editor.create();
+
+    function GetRequest(name) {
+        let reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+        let r = window.location.search.substr(1).match(reg);
+        if(r!=null)return  unescape(r[2]); return null;
+    }
+    let rid  = GetRequest("rid");
+    let type = 0;
+    let sourceId = rid;
+    if(rid == null){
+        type = 1;
+        sourceId = GetRequest("wid")
+    }
+
+    $("#sbtbutton").attr("sourceId",sourceId);
+    $("#sbtbutton").attr("type",type);
+    $.post("/api/record/get",{
+        type : type,
+        sourceId : sourceId
+    },(result)=>{
+        $(".w-e-text").html(result);
+    });
+
+    function submit() {
+        let html = $(".w-e-text").html();
+        let type = $("#sbtbutton").attr("type");
+        let id   = $("#sbtbutton").attr("sourceId");
+        $.post("/api/record/set",{
+            type : type,
+            sourceId : id,
+            content : html
+        },(result)=>{
+            alert("success")
+        });
+
+        // $.post("/api/record/set",{
+        //     type : type,
+        //     sourceId : id,
+        //     content : html
+        // },(result)=>{
+        //     alert("保存成功")
+        // });
+    }
+
+</script>
+</body>
+</html>
