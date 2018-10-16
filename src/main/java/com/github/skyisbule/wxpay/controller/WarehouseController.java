@@ -47,9 +47,11 @@ public class WarehouseController {
         Date begin = sdf.parse("2018-1-1 00:00:00");
         Date end   = new Date();
         if (createDate!=null){
-            String[] strs = createDate.split(" - ");
-            begin = sdf.parse(strs[0]+" 00:00:00");
-            end   = sdf.parse(strs[1]+" 00:00:00");
+            if (createDate.length()>6) {
+                String[] strs = createDate.split(" - ");
+                begin = sdf.parse(strs[0] + " 00:00:00");
+                end = sdf.parse(strs[1] + " 00:00:00");
+            }
         }
         if (superStatus!=null) status = superStatus;
         if(city==null) city = "";
@@ -59,7 +61,7 @@ public class WarehouseController {
         e.setOffset(10*(pageNum-1));
         e.setLimit(pageSize);
         e.setOrderByClause("wid desc");
-        if(status>0&&status<5){
+        if(status>-1&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status)
                     .andLocateLike("%"+city+"%")

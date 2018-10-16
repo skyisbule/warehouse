@@ -108,7 +108,7 @@ public class RequireController {
         e.setOffset(10*(pageNum-1));
         e.setLimit(pageSize);
         e.setOrderByClause("rid desc");
-        if (status>0&&status<5){
+        if (status>-1&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status)
                     .andLocatesLike("%"+city+"%")

@@ -36,4 +36,7 @@ public class HtmlController {
     @RequestMapping("/index")
     public String index(){return "index";}
 
+    @RequestMapping("/ipad")
+    public String ipad(){return "ipad";}
+
 }
