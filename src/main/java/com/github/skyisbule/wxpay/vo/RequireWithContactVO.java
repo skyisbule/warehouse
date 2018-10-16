@@ -96,6 +96,17 @@ public class RequireWithContactVO{
      */
     private String company;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private Date createTime;
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     public void setRequire(Require require){
         this.rid = require.getRid();
         this.area = require.getArea();
@@ -110,6 +121,7 @@ public class RequireWithContactVO{
         this.remark = require.getRemark();
         this.status = require.getStatus();
         this.openId = require.getOpenId();
+        this.createTime = require.getCreateTime();
     }
 
     public void setUser(User user){
