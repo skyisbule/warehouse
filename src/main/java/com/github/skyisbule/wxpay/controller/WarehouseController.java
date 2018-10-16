@@ -162,6 +162,7 @@ public class WarehouseController {
     public synchronized String add(@RequestBody WarehouseWithUnitVO vo){
         //todo 这里对数据做一下校验
         String result = "{\"code\":200}";
+        vo.getWarehouse().setCreateTime(new Date());
         try {
             warehouseMapper.insert(vo.getWarehouse());
             int warehouseId = warehouseDao.getMaxIdFromWarehouse();
@@ -178,6 +179,9 @@ public class WarehouseController {
     @ApiOperation("修改仓库信息")
     @RequestMapping("/update-warehouse")
     public String update(Warehouse warehouse){
+        Warehouse old = warehouseMapper.selectByPrimaryKey(warehouse.getWid());
+        warehouse.setCreateTime(old.getCreateTime());
+        warehouse.setOpenId(old.getOpenId());
         if (warehouse.getWid()==null) return "null id";
         warehouseMapper.updateByPrimaryKey(warehouse);
         return "{\"errorNo\":\"0\",\"errorInfo\":\"执行成功\",\"results\":{\"data\":[]}}";

@@ -13,8 +13,8 @@ wechat:
     #subMchId:
     keyPath: classpath:apiclient_cert.p12
   miniapp:
-    appid: 
-    secret: 
+    appid: wxf134e694dfd9306a
+    secret: 8ab644384e2addb0ee60ca8700054996
     token: 111
     aesKey: 111
     msgDataFormat:
