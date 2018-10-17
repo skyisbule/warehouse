@@ -161,7 +161,7 @@ public class RequireController {
     @RequestMapping("/update")
     public String update(Require require){
         Require old = requireMapper.selectByPrimaryKey(require.getRid());
-        require.setCreateTime(old.getRequireTime());
+        require.setCreateTime(old.getCreateTime());
         require.setOpenId(old.getOpenId());
         requireMapper.updateByPrimaryKey(require);
         return "{\"errorNo\":\"0\",\"errorInfo\":\"执行成功\",\"results\":{\"data\":[]}}";
