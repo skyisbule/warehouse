@@ -182,6 +182,7 @@ public class WarehouseController {
         Warehouse old = warehouseMapper.selectByPrimaryKey(warehouse.getWid());
         warehouse.setCreateTime(old.getCreateTime());
         warehouse.setOpenId(old.getOpenId());
+        warehouse.setPicture(old.getPicture());
         if (warehouse.getWid()==null) return "null id";
         warehouseMapper.updateByPrimaryKey(warehouse);
         return "{\"errorNo\":\"0\",\"errorInfo\":\"执行成功\",\"results\":{\"data\":[]}}";
