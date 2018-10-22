@@ -9,8 +9,13 @@ import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.http.HttpUtil;
 import cn.hutool.json.JSONUtil;
+import com.github.skyisbule.wxpay.dao.RequireCodePicCacheMapper;
 import com.github.skyisbule.wxpay.dao.UserMapper;
+import com.github.skyisbule.wxpay.dao.WarehouseCodePicCacheMapper;
+import com.github.skyisbule.wxpay.domain.RequireCodePicCache;
+import com.github.skyisbule.wxpay.domain.RequireCodePicCacheExample;
 import com.github.skyisbule.wxpay.domain.User;
+import com.github.skyisbule.wxpay.domain.WarehouseCodePicCache;
 import com.github.skyisbule.wxpay.service.QiniuService;
 import com.github.skyisbule.wxpay.service.UserService;
 import me.chanjar.weixin.common.error.WxErrorException;
@@ -45,10 +50,16 @@ public class WxMaUserController {
     @Autowired
     private QiniuService qiniuService;
 
+    @Autowired
+    RequireCodePicCacheMapper requireCodePicCacheMapper;
+
+    @Autowired
+    WarehouseCodePicCacheMapper warehouseCodePicCacheMapper;
+
    // @Autowired
    // private WxMaQrcodeService qrcodeService;
 
-    @RequestMapping("/getAccessToken")
+    //@RequestMapping("/getAccessToken")
     public String getToken() throws WxErrorException {
         return wxService.getAccessToken();
     }
@@ -57,6 +68,9 @@ public class WxMaUserController {
 
     @RequestMapping("/createCodeRequire")
     public String createCodeRequire(int rid) throws WxErrorException {
+        RequireCodePicCache cache = requireCodePicCacheMapper.selectByPrimaryKey(rid);
+        if (cache!=null)
+            return cache.getKey();
         File file = wxService.getQrcodeService().createWxaCodeUnlimit(
                 String.valueOf(rid),
                 "pages/needDetail/needDetail"
@@ -66,6 +80,9 @@ public class WxMaUserController {
 
     @RequestMapping("/createCodeWarehouse")
     public String createCodeWarehouse(int wid) throws WxErrorException {
+        WarehouseCodePicCache cache = warehouseCodePicCacheMapper.selectByPrimaryKey(wid);
+        if (cache!=null)
+            return cache.getKey();
         File file = wxService.getQrcodeService().createWxaCodeUnlimit(
                 String.valueOf(wid),
                 "pages/warehouseDetail/warehouseDetail"
