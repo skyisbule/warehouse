@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class WarehouseCodePicCache implements Serializable {
     private Integer wid;
 
-    private String key;
+    private String url;
 
     private static final long serialVersionUID = 1L;
 
@@ -20,12 +20,12 @@ public class WarehouseCodePicCache implements Serializable {
         this.wid = wid;
     }
 
-    public String getKey() {
-        return key;
+    public String getUrl() {
+        return url;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class WarehouseCodePicCache implements Serializable {
         }
         WarehouseCodePicCache other = (WarehouseCodePicCache) that;
         return (this.getWid() == null ? other.getWid() == null : this.getWid().equals(other.getWid()))
-            && (this.getKey() == null ? other.getKey() == null : this.getKey().equals(other.getKey()));
+            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class WarehouseCodePicCache implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getWid() == null) ? 0 : getWid().hashCode());
-        result = prime * result + ((getKey() == null) ? 0 : getKey().hashCode());
+        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
         return result;
     }
 
@@ -60,7 +60,7 @@ public class WarehouseCodePicCache implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", wid=").append(wid);
-        sb.append(", key=").append(key);
+        sb.append(", url=").append(url);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

@@ -8,7 +8,7 @@ import java.io.Serializable;
 public class RequireCodePicCache implements Serializable {
     private Integer rid;
 
-    private String key;
+    private String url;
 
     private static final long serialVersionUID = 1L;
 
@@ -20,12 +20,12 @@ public class RequireCodePicCache implements Serializable {
         this.rid = rid;
     }
 
-    public String getKey() {
-        return key;
+    public String getUrl() {
+        return url;
     }
 
-    public void setKey(String key) {
-        this.key = key;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     @Override
@@ -41,7 +41,7 @@ public class RequireCodePicCache implements Serializable {
         }
         RequireCodePicCache other = (RequireCodePicCache) that;
         return (this.getRid() == null ? other.getRid() == null : this.getRid().equals(other.getRid()))
-            && (this.getKey() == null ? other.getKey() == null : this.getKey().equals(other.getKey()));
+            && (this.getUrl() == null ? other.getUrl() == null : this.getUrl().equals(other.getUrl()));
     }
 
     @Override
@@ -49,7 +49,7 @@ public class RequireCodePicCache implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getRid() == null) ? 0 : getRid().hashCode());
-        result = prime * result + ((getKey() == null) ? 0 : getKey().hashCode());
+        result = prime * result + ((getUrl() == null) ? 0 : getUrl().hashCode());
         return result;
     }
 
@@ -60,7 +60,7 @@ public class RequireCodePicCache implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", rid=").append(rid);
-        sb.append(", key=").append(key);
+        sb.append(", url=").append(url);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

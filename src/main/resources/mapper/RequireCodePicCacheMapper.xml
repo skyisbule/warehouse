@@ -3,7 +3,7 @@
 <mapper namespace="com.github.skyisbule.wxpay.dao.RequireCodePicCacheMapper">
   <resultMap id="BaseResultMap" type="com.github.skyisbule.wxpay.domain.RequireCodePicCache">
     <id column="rid" jdbcType="INTEGER" property="rid" />
-    <result column="key" jdbcType="CHAR" property="key" />
+    <result column="url" jdbcType="CHAR" property="url" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -64,7 +64,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    rid, key
+    rid, url
   </sql>
   <select id="selectByExample" parameterType="com.github.skyisbule.wxpay.domain.RequireCodePicCacheExample" resultMap="BaseResultMap">
     select
@@ -105,8 +105,8 @@
     </if>
   </delete>
   <insert id="insert" parameterType="com.github.skyisbule.wxpay.domain.RequireCodePicCache">
-    insert into db_require_code_pic_cache (rid, key)
-    values (#{rid,jdbcType=INTEGER}, #{key,jdbcType=CHAR})
+    insert into db_require_code_pic_cache (rid, url)
+    values (#{rid,jdbcType=INTEGER}, #{url,jdbcType=CHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.github.skyisbule.wxpay.domain.RequireCodePicCache">
     insert into db_require_code_pic_cache
@@ -114,16 +114,16 @@
       <if test="rid != null">
         rid,
       </if>
-      <if test="key != null">
-        key,
+      <if test="url != null">
+        url,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="rid != null">
         #{rid,jdbcType=INTEGER},
       </if>
-      <if test="key != null">
-        #{key,jdbcType=CHAR},
+      <if test="url != null">
+        #{url,jdbcType=CHAR},
       </if>
     </trim>
   </insert>
@@ -139,8 +139,8 @@
       <if test="record.rid != null">
         rid = #{record.rid,jdbcType=INTEGER},
       </if>
-      <if test="record.key != null">
-        key = #{record.key,jdbcType=CHAR},
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=CHAR},
       </if>
     </set>
     <if test="_parameter != null">
@@ -150,7 +150,7 @@
   <update id="updateByExample" parameterType="map">
     update db_require_code_pic_cache
     set rid = #{record.rid,jdbcType=INTEGER},
-      key = #{record.key,jdbcType=CHAR}
+      url = #{record.url,jdbcType=CHAR}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -158,15 +158,15 @@
   <update id="updateByPrimaryKeySelective" parameterType="com.github.skyisbule.wxpay.domain.RequireCodePicCache">
     update db_require_code_pic_cache
     <set>
-      <if test="key != null">
-        key = #{key,jdbcType=CHAR},
+      <if test="url != null">
+        url = #{url,jdbcType=CHAR},
       </if>
     </set>
     where rid = #{rid,jdbcType=INTEGER}
   </update>
   <update id="updateByPrimaryKey" parameterType="com.github.skyisbule.wxpay.domain.RequireCodePicCache">
     update db_require_code_pic_cache
-    set key = #{key,jdbcType=CHAR}
+    set url = #{url,jdbcType=CHAR}
     where rid = #{rid,jdbcType=INTEGER}
   </update>
 </mapper>
