@@ -106,7 +106,7 @@ public class RequireExample {
 
         protected void addCriterion(String condition) {
             if (condition == null) {
-                //throw new RuntimeException("Value for " + property + " cannot be null");
+                //throw new RuntimeException("Value for condition cannot be null");
                 return ;
             }
             criteria.add(new Criterion(condition));
@@ -122,7 +122,7 @@ public class RequireExample {
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
             if (value1 == null || value2 == null) {
-                //throw new RuntimeException("Value for " + property + " cannot be null");
+                //throw new RuntimeException("Between values for " + property + " cannot be null");
                 return ;
             }
             criteria.add(new Criterion(condition, value1, value2));
@@ -229,8 +229,7 @@ public class RequireExample {
         }
 
         public Criteria andLocatesLike(String value) {
-            if (!value.equals("%%"))
-                addCriterion("locates like", value, "locates");
+            addCriterion("locates like", value, "locates");
             return (Criteria) this;
         }
 
@@ -360,8 +359,7 @@ public class RequireExample {
         }
 
         public Criteria andPurposeLike(String value) {
-            if (!value.equals("%%"))
-                addCriterion("purpose like", value, "purpose");
+            addCriterion("purpose like", value, "purpose");
             return (Criteria) this;
         }
 
@@ -1047,6 +1045,126 @@ public class RequireExample {
 
         public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
             addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdIsNull() {
+            addCriterion("shop_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdIsNotNull() {
+            addCriterion("shop_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdEqualTo(Integer value) {
+            addCriterion("shop_id =", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotEqualTo(Integer value) {
+            addCriterion("shop_id <>", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdGreaterThan(Integer value) {
+            addCriterion("shop_id >", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("shop_id >=", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdLessThan(Integer value) {
+            addCriterion("shop_id <", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdLessThanOrEqualTo(Integer value) {
+            addCriterion("shop_id <=", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdIn(List<Integer> values) {
+            addCriterion("shop_id in", values, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotIn(List<Integer> values) {
+            addCriterion("shop_id not in", values, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdBetween(Integer value1, Integer value2) {
+            addCriterion("shop_id between", value1, value2, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("shop_id not between", value1, value2, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidIsNull() {
+            addCriterion("source_rid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidIsNotNull() {
+            addCriterion("source_rid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidEqualTo(Integer value) {
+            addCriterion("source_rid =", value, "sourceRid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidNotEqualTo(Integer value) {
+            addCriterion("source_rid <>", value, "sourceRid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidGreaterThan(Integer value) {
+            addCriterion("source_rid >", value, "sourceRid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("source_rid >=", value, "sourceRid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidLessThan(Integer value) {
+            addCriterion("source_rid <", value, "sourceRid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidLessThanOrEqualTo(Integer value) {
+            addCriterion("source_rid <=", value, "sourceRid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidIn(List<Integer> values) {
+            addCriterion("source_rid in", values, "sourceRid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidNotIn(List<Integer> values) {
+            addCriterion("source_rid not in", values, "sourceRid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidBetween(Integer value1, Integer value2) {
+            addCriterion("source_rid between", value1, value2, "sourceRid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceRidNotBetween(Integer value1, Integer value2) {
+            addCriterion("source_rid not between", value1, value2, "sourceRid");
             return (Criteria) this;
         }
     }

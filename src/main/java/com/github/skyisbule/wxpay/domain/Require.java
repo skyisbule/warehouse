@@ -1,7 +1,5 @@
 package com.github.skyisbule.wxpay.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -44,7 +42,6 @@ public class Require implements Serializable {
     /**
      * 需求时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date requireTime;
 
     /**
@@ -75,8 +72,11 @@ public class Require implements Serializable {
     /**
      * 创建这条记录的时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    private Integer shopId;
+
+    private Integer sourceRid;
 
     private static final long serialVersionUID = 1L;
 
@@ -192,6 +192,22 @@ public class Require implements Serializable {
         this.createTime = createTime;
     }
 
+    public Integer getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public Integer getSourceRid() {
+        return sourceRid;
+    }
+
+    public void setSourceRid(Integer sourceRid) {
+        this.sourceRid = sourceRid;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -217,7 +233,9 @@ public class Require implements Serializable {
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
             && (this.getOpenId() == null ? other.getOpenId() == null : this.getOpenId().equals(other.getOpenId()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getShopId() == null ? other.getShopId() == null : this.getShopId().equals(other.getShopId()))
+            && (this.getSourceRid() == null ? other.getSourceRid() == null : this.getSourceRid().equals(other.getSourceRid()));
     }
 
     @Override
@@ -238,6 +256,8 @@ public class Require implements Serializable {
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getOpenId() == null) ? 0 : getOpenId().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
+        result = prime * result + ((getShopId() == null) ? 0 : getShopId().hashCode());
+        result = prime * result + ((getSourceRid() == null) ? 0 : getSourceRid().hashCode());
         return result;
     }
 
@@ -261,6 +281,8 @@ public class Require implements Serializable {
         sb.append(", status=").append(status);
         sb.append(", openId=").append(openId);
         sb.append(", createTime=").append(createTime);
+        sb.append(", shopId=").append(shopId);
+        sb.append(", sourceRid=").append(sourceRid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

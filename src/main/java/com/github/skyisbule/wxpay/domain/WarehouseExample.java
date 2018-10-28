@@ -107,7 +107,7 @@ public class WarehouseExample {
         protected void addCriterion(String condition) {
             if (condition == null) {
                 //throw new RuntimeException("Value for condition cannot be null");
-                return;
+                return ;
             }
             criteria.add(new Criterion(condition));
         }
@@ -229,8 +229,7 @@ public class WarehouseExample {
         }
 
         public Criteria andLocateLike(String value) {
-            if (!value.equals("%%"))
-                addCriterion("locate like", value, "locate");
+            addCriterion("locate like", value, "locate");
             return (Criteria) this;
         }
 
@@ -710,8 +709,7 @@ public class WarehouseExample {
         }
 
         public Criteria andRemarkLike(String value) {
-            if (!value.equals("%%"))
-                addCriterion("remark like", value, "remark");
+            addCriterion("remark like", value, "remark");
             return (Criteria) this;
         }
 
@@ -857,6 +855,126 @@ public class WarehouseExample {
 
         public Criteria andCreateTimeNotBetween(Date value1, Date value2) {
             addCriterion("create_time not between", value1, value2, "createTime");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdIsNull() {
+            addCriterion("shop_id is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdIsNotNull() {
+            addCriterion("shop_id is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdEqualTo(Integer value) {
+            addCriterion("shop_id =", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotEqualTo(Integer value) {
+            addCriterion("shop_id <>", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdGreaterThan(Integer value) {
+            addCriterion("shop_id >", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdGreaterThanOrEqualTo(Integer value) {
+            addCriterion("shop_id >=", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdLessThan(Integer value) {
+            addCriterion("shop_id <", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdLessThanOrEqualTo(Integer value) {
+            addCriterion("shop_id <=", value, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdIn(List<Integer> values) {
+            addCriterion("shop_id in", values, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotIn(List<Integer> values) {
+            addCriterion("shop_id not in", values, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdBetween(Integer value1, Integer value2) {
+            addCriterion("shop_id between", value1, value2, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andShopIdNotBetween(Integer value1, Integer value2) {
+            addCriterion("shop_id not between", value1, value2, "shopId");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidIsNull() {
+            addCriterion("source_wid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidIsNotNull() {
+            addCriterion("source_wid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidEqualTo(Integer value) {
+            addCriterion("source_wid =", value, "sourceWid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidNotEqualTo(Integer value) {
+            addCriterion("source_wid <>", value, "sourceWid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidGreaterThan(Integer value) {
+            addCriterion("source_wid >", value, "sourceWid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidGreaterThanOrEqualTo(Integer value) {
+            addCriterion("source_wid >=", value, "sourceWid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidLessThan(Integer value) {
+            addCriterion("source_wid <", value, "sourceWid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidLessThanOrEqualTo(Integer value) {
+            addCriterion("source_wid <=", value, "sourceWid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidIn(List<Integer> values) {
+            addCriterion("source_wid in", values, "sourceWid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidNotIn(List<Integer> values) {
+            addCriterion("source_wid not in", values, "sourceWid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidBetween(Integer value1, Integer value2) {
+            addCriterion("source_wid between", value1, value2, "sourceWid");
+            return (Criteria) this;
+        }
+
+        public Criteria andSourceWidNotBetween(Integer value1, Integer value2) {
+            addCriterion("source_wid not between", value1, value2, "sourceWid");
             return (Criteria) this;
         }
     }

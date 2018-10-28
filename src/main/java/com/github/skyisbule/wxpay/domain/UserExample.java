@@ -105,24 +105,21 @@ public class UserExample {
 
         protected void addCriterion(String condition) {
             if (condition == null) {
-                //throw new RuntimeException("Value for condition cannot be null");
-                return ;
+                throw new RuntimeException("Value for condition cannot be null");
             }
             criteria.add(new Criterion(condition));
         }
 
         protected void addCriterion(String condition, Object value, String property) {
             if (value == null) {
-                //throw new RuntimeException("Value for condition cannot be null");
-                return ;
+                throw new RuntimeException("Value for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value));
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
             if (value1 == null || value2 == null) {
-                //throw new RuntimeException("Value for condition cannot be null");
-                return ;
+                throw new RuntimeException("Between values for " + property + " cannot be null");
             }
             criteria.add(new Criterion(condition, value1, value2));
         }
@@ -298,8 +295,7 @@ public class UserExample {
         }
 
         public Criteria andRealNameLike(String value) {
-            if (!value.equals("%%"))
-               addCriterion("real_name like", value, "realName");
+            addCriterion("real_name like", value, "realName");
             return (Criteria) this;
         }
 
@@ -369,8 +365,7 @@ public class UserExample {
         }
 
         public Criteria andNickNameLike(String value) {
-            if(!value.equals("%%"))
-                addCriterion("nick_name like", value, "nickName");
+            addCriterion("nick_name like", value, "nickName");
             return (Criteria) this;
         }
 
@@ -510,8 +505,7 @@ public class UserExample {
         }
 
         public Criteria andTelNumLike(String value) {
-            if(!value.equals("%%"))
-                addCriterion("tel_num like", value, "telNum");
+            addCriterion("tel_num like", value, "telNum");
             return (Criteria) this;
         }
 
@@ -721,8 +715,7 @@ public class UserExample {
         }
 
         public Criteria andCompanyLike(String value) {
-            if(!value.equals("%%"))
-                addCriterion("company like", value, "company");
+            addCriterion("company like", value, "company");
             return (Criteria) this;
         }
 
@@ -818,6 +811,66 @@ public class UserExample {
 
         public Criteria andHeadPicNotBetween(String value1, String value2) {
             addCriterion("head_pic not between", value1, value2, "headPic");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpIsNull() {
+            addCriterion("open_up is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpIsNotNull() {
+            addCriterion("open_up is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpEqualTo(Integer value) {
+            addCriterion("open_up =", value, "openUp");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpNotEqualTo(Integer value) {
+            addCriterion("open_up <>", value, "openUp");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpGreaterThan(Integer value) {
+            addCriterion("open_up >", value, "openUp");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpGreaterThanOrEqualTo(Integer value) {
+            addCriterion("open_up >=", value, "openUp");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpLessThan(Integer value) {
+            addCriterion("open_up <", value, "openUp");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpLessThanOrEqualTo(Integer value) {
+            addCriterion("open_up <=", value, "openUp");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpIn(List<Integer> values) {
+            addCriterion("open_up in", values, "openUp");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpNotIn(List<Integer> values) {
+            addCriterion("open_up not in", values, "openUp");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpBetween(Integer value1, Integer value2) {
+            addCriterion("open_up between", value1, value2, "openUp");
+            return (Criteria) this;
+        }
+
+        public Criteria andOpenUpNotBetween(Integer value1, Integer value2) {
+            addCriterion("open_up not between", value1, value2, "openUp");
             return (Criteria) this;
         }
     }

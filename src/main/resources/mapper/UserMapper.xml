@@ -12,6 +12,7 @@
     <result column="locate" jdbcType="VARCHAR" property="locate" />
     <result column="company" jdbcType="VARCHAR" property="company" />
     <result column="head_pic" jdbcType="VARCHAR" property="headPic" />
+    <result column="open_up" jdbcType="INTEGER" property="openUp" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -72,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    uid, open_id, real_name, nick_name, sex, tel_num, email, locate, company, head_pic
+    uid, open_id, real_name, nick_name, sex, tel_num, email, locate, company, head_pic, 
+    open_up
   </sql>
   <select id="selectByExample" parameterType="com.github.skyisbule.wxpay.domain.UserExample" resultMap="BaseResultMap">
     select
@@ -116,11 +118,11 @@
     insert into db_user (uid, open_id, real_name, 
       nick_name, sex, tel_num, 
       email, locate, company, 
-      head_pic)
+      head_pic, open_up)
     values (#{uid,jdbcType=INTEGER}, #{openId,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, 
       #{nickName,jdbcType=VARCHAR}, #{sex,jdbcType=CHAR}, #{telNum,jdbcType=VARCHAR}, 
       #{email,jdbcType=VARCHAR}, #{locate,jdbcType=VARCHAR}, #{company,jdbcType=VARCHAR}, 
-      #{headPic,jdbcType=VARCHAR})
+      #{headPic,jdbcType=VARCHAR}, #{openUp,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.github.skyisbule.wxpay.domain.User">
     insert into db_user
@@ -155,6 +157,9 @@
       <if test="headPic != null">
         head_pic,
       </if>
+      <if test="openUp != null">
+        open_up,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="uid != null">
@@ -186,6 +191,9 @@
       </if>
       <if test="headPic != null">
         #{headPic,jdbcType=VARCHAR},
+      </if>
+      <if test="openUp != null">
+        #{openUp,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -228,6 +236,9 @@
       <if test="record.headPic != null">
         head_pic = #{record.headPic,jdbcType=VARCHAR},
       </if>
+      <if test="record.openUp != null">
+        open_up = #{record.openUp,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -244,7 +255,8 @@
       email = #{record.email,jdbcType=VARCHAR},
       locate = #{record.locate,jdbcType=VARCHAR},
       company = #{record.company,jdbcType=VARCHAR},
-      head_pic = #{record.headPic,jdbcType=VARCHAR}
+      head_pic = #{record.headPic,jdbcType=VARCHAR},
+      open_up = #{record.openUp,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -279,6 +291,9 @@
       <if test="headPic != null">
         head_pic = #{headPic,jdbcType=VARCHAR},
       </if>
+      <if test="openUp != null">
+        open_up = #{openUp,jdbcType=INTEGER},
+      </if>
     </set>
     where uid = #{uid,jdbcType=INTEGER}
   </update>
@@ -292,7 +307,8 @@
       email = #{email,jdbcType=VARCHAR},
       locate = #{locate,jdbcType=VARCHAR},
       company = #{company,jdbcType=VARCHAR},
-      head_pic = #{headPic,jdbcType=VARCHAR}
+      head_pic = #{headPic,jdbcType=VARCHAR},
+      open_up = #{openUp,jdbcType=INTEGER}
     where uid = #{uid,jdbcType=INTEGER}
   </update>
 </mapper>

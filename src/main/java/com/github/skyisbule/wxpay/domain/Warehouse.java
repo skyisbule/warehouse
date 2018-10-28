@@ -1,7 +1,5 @@
 package com.github.skyisbule.wxpay.domain;
 
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.io.Serializable;
 import java.util.Date;
 
@@ -59,8 +57,14 @@ public class Warehouse implements Serializable {
     /**
      * 创建时间
      */
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createTime;
+
+    /**
+     * 其实是userid
+     */
+    private Integer shopId;
+
+    private Integer sourceWid;
 
     private static final long serialVersionUID = 1L;
 
@@ -152,6 +156,22 @@ public class Warehouse implements Serializable {
         this.createTime = createTime;
     }
 
+    public Integer getShopId() {
+        return shopId;
+    }
+
+    public void setShopId(Integer shopId) {
+        this.shopId = shopId;
+    }
+
+    public Integer getSourceWid() {
+        return sourceWid;
+    }
+
+    public void setSourceWid(Integer sourceWid) {
+        this.sourceWid = sourceWid;
+    }
+
     @Override
     public boolean equals(Object that) {
         if (this == that) {
@@ -174,7 +194,9 @@ public class Warehouse implements Serializable {
             && (this.getAdvantage() == null ? other.getAdvantage() == null : this.getAdvantage().equals(other.getAdvantage()))
             && (this.getRemark() == null ? other.getRemark() == null : this.getRemark().equals(other.getRemark()))
             && (this.getStatus() == null ? other.getStatus() == null : this.getStatus().equals(other.getStatus()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()));
+            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
+            && (this.getShopId() == null ? other.getShopId() == null : this.getShopId().equals(other.getShopId()))
+            && (this.getSourceWid() == null ? other.getSourceWid() == null : this.getSourceWid().equals(other.getSourceWid()));
     }
 
     @Override
@@ -192,6 +214,8 @@ public class Warehouse implements Serializable {
         result = prime * result + ((getRemark() == null) ? 0 : getRemark().hashCode());
         result = prime * result + ((getStatus() == null) ? 0 : getStatus().hashCode());
         result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
+        result = prime * result + ((getShopId() == null) ? 0 : getShopId().hashCode());
+        result = prime * result + ((getSourceWid() == null) ? 0 : getSourceWid().hashCode());
         return result;
     }
 
@@ -212,6 +236,8 @@ public class Warehouse implements Serializable {
         sb.append(", remark=").append(remark);
         sb.append(", status=").append(status);
         sb.append(", createTime=").append(createTime);
+        sb.append(", shopId=").append(shopId);
+        sb.append(", sourceWid=").append(sourceWid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

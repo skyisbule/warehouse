@@ -13,6 +13,8 @@
     <result column="remark" jdbcType="VARCHAR" property="remark" />
     <result column="status" jdbcType="INTEGER" property="status" />
     <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="shop_id" jdbcType="INTEGER" property="shopId" />
+    <result column="source_wid" jdbcType="INTEGER" property="sourceWid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     wid, locate, picture, park_service, suitable_for, is_pass, open_id, advantage, remark, 
-    status, create_time
+    status, create_time, shop_id, source_wid
   </sql>
   <select id="selectByExample" parameterType="com.github.skyisbule.wxpay.domain.WarehouseExample" resultMap="BaseResultMap">
     select
@@ -118,11 +120,13 @@
     insert into db_warehouse (wid, locate, picture, 
       park_service, suitable_for, is_pass, 
       open_id, advantage, remark, 
-      status, create_time)
+      status, create_time, shop_id, 
+      source_wid)
     values (#{wid,jdbcType=INTEGER}, #{locate,jdbcType=VARCHAR}, #{picture,jdbcType=VARCHAR}, 
       #{parkService,jdbcType=VARCHAR}, #{suitableFor,jdbcType=VARCHAR}, #{isPass,jdbcType=INTEGER}, 
       #{openId,jdbcType=CHAR}, #{advantage,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}, 
-      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP})
+      #{status,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{shopId,jdbcType=INTEGER}, 
+      #{sourceWid,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.github.skyisbule.wxpay.domain.Warehouse">
     insert into db_warehouse
@@ -160,6 +164,12 @@
       <if test="createTime != null">
         create_time,
       </if>
+      <if test="shopId != null">
+        shop_id,
+      </if>
+      <if test="sourceWid != null">
+        source_wid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="wid != null">
@@ -194,6 +204,12 @@
       </if>
       <if test="createTime != null">
         #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="shopId != null">
+        #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="sourceWid != null">
+        #{sourceWid,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
@@ -239,6 +255,12 @@
       <if test="record.createTime != null">
         create_time = #{record.createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="record.shopId != null">
+        shop_id = #{record.shopId,jdbcType=INTEGER},
+      </if>
+      <if test="record.sourceWid != null">
+        source_wid = #{record.sourceWid,jdbcType=INTEGER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -256,7 +278,9 @@
       advantage = #{record.advantage,jdbcType=VARCHAR},
       remark = #{record.remark,jdbcType=VARCHAR},
       status = #{record.status,jdbcType=INTEGER},
-      create_time = #{record.createTime,jdbcType=TIMESTAMP}
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      shop_id = #{record.shopId,jdbcType=INTEGER},
+      source_wid = #{record.sourceWid,jdbcType=INTEGER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -294,6 +318,12 @@
       <if test="createTime != null">
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
+      <if test="shopId != null">
+        shop_id = #{shopId,jdbcType=INTEGER},
+      </if>
+      <if test="sourceWid != null">
+        source_wid = #{sourceWid,jdbcType=INTEGER},
+      </if>
     </set>
     where wid = #{wid,jdbcType=INTEGER}
   </update>
@@ -308,7 +338,9 @@
       advantage = #{advantage,jdbcType=VARCHAR},
       remark = #{remark,jdbcType=VARCHAR},
       status = #{status,jdbcType=INTEGER},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      shop_id = #{shopId,jdbcType=INTEGER},
+      source_wid = #{sourceWid,jdbcType=INTEGER}
     where wid = #{wid,jdbcType=INTEGER}
   </update>
 </mapper>
