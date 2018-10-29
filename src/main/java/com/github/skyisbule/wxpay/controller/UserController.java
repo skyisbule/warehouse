@@ -41,6 +41,12 @@ public class UserController {
         return userMapper.selectByExample(e).get(0);
     }
 
+    @ResponseBody
+    @RequestMapping("/get-by-uid")
+    public User getByUid(Integer uid){
+        return userMapper.selectByPrimaryKey(uid);
+    }
+
     @RequestMapping("/login")
     public String login(String account, String passwd, HttpServletResponse response){
         AdminExample e = new AdminExample();

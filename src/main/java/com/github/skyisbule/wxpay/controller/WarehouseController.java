@@ -104,6 +104,7 @@ public class WarehouseController {
     @RequestMapping("/get-warehouse-all-by-page")
     public List<WarehouseWithUnitVO> getAllByPage(@ApiParam("从一开始") int pageNum,
                                                   @ApiParam("城市")String city,
+                                                  @ApiParam("店铺id")Integer shopId,
                                                   @ApiParam("状态为5则为全部") int status,
                                                   @ApiParam("一页返回多少数据，不填默认10")Integer pageSize,
                                                   @ApiParam("用户的openid")String openId) {
@@ -116,11 +117,13 @@ public class WarehouseController {
             e.createCriteria()
                     .andStatusEqualTo(status)
                     .andLocateLike( "%" + city + "%")
+                    .andShopIdEqualTo(shopId)
                     .andOpenIdEqualTo(openId);
         }
         if(status == 5){
             e.createCriteria()
-                    .andOpenIdEqualTo(openId);
+                    .andOpenIdEqualTo(openId)
+                    .andShopIdEqualTo(shopId);
         }
         List<Warehouse> warehouses =  warehouseMapper.selectByExample(e);
         List<WarehouseWithUnitVO> results = new ArrayList<>(10);

@@ -1,6 +1,5 @@
 package com.github.skyisbule.wxpay.controller;
 
-import cn.hutool.bloomfilter.filter.SDBMFilter;
 import com.github.skyisbule.wxpay.dao.RequireMapper;
 import com.github.skyisbule.wxpay.domain.Require;
 import com.github.skyisbule.wxpay.domain.RequireExample;
@@ -53,6 +52,7 @@ public class RequireController {
                             @ApiParam("状态为5则为全部") int status,
                             @ApiParam("一页返回多少数据，不填的话默认为10")Integer pageSize,
                             @ApiParam("用户的openid")String openId,
+                            @ApiParam("店铺id")Integer shopId,
                             @ApiParam("创建时间") String createTime,
                             @ApiParam("需求时间")String requireTime,
                             @ApiParam("面积 用-隔开")String areas,
@@ -112,6 +112,7 @@ public class RequireController {
             e.createCriteria()
                     .andStatusEqualTo(status)
                     .andLocatesLike("%"+city+"%")
+                    .andShopIdEqualTo(shopId)
                     .andOpenIdEqualTo(openId)
                     .andCreateTimeBetween(createTimeBegin,createTimeEnd)
                     .andRequireTimeBetween(requireTimeBegin,requireTimeEnd)
@@ -123,6 +124,7 @@ public class RequireController {
             e.createCriteria()
                     .andLocatesLike("%"+city+"%")
                     .andOpenIdEqualTo(openId)
+                    .andShopIdEqualTo(shopId)
                     .andCreateTimeBetween(createTimeBegin,createTimeEnd)
                     .andRequireTimeBetween(requireTimeBegin,requireTimeEnd)
                     .andAreaBetween(areaBegin,areaEnd)
@@ -182,6 +184,8 @@ public class RequireController {
     @ApiOperation("添加一条需求")
     @RequestMapping("/add")
     public String add(Require require){
+        if (require.getSourceRid()==null)
+            require.setSourceRid(require.getShopId());
         require.setCreateTime(new Date());
         requireMapper.insert(require);
         return "success";
