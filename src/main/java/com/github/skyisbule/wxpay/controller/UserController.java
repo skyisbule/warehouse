@@ -115,6 +115,8 @@ public class UserController {
     public String doUpdate(User user){
         User oldUser = userMapper.selectByPrimaryKey(user.getUid());
         user.setOpenId(oldUser.getOpenId());
+        if (user.getOpenUp()==null)
+            user.setOpenUp(oldUser.getOpenUp());
         userMapper.updateByPrimaryKey(user);
         return "{\"errorNo\":\"0\",\"errorInfo\":\"执行成功\",\"results\":{\"data\":[]}}";
     }
