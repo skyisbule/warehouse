@@ -15,7 +15,7 @@ import java.util.Map;
 @Repository
 public interface CollectDAO extends MyBatisBaseDao<Collect, Integer, CollectExample> {
 
-    @Select("select * from db_collect c left join db_user u on c.uid = u.uid where c.uid = ${uid} ")
+    @Select("select * from db_collect c left join db_user u on c.shop_id = u.uid where c.uid = ${uid} ")
     public List<Map<String,Object>> getUserCollected(@Param("uid") int uid);
 
 }

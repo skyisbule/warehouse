@@ -42,7 +42,8 @@ public class WarehouseController {
                                   @ApiParam("一页返回多少数据，不填默认10")Integer pageSize,
                                   @ApiParam("高级搜索的状态")Integer superStatus,
                                   @ApiParam("备注")String remark,
-                                  @ApiParam("创建时间")String createDate) throws ParseException {
+                                  @ApiParam("创建时间")String createDate,
+                                  Integer shopId) throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date begin = sdf.parse("2018-1-1 00:00:00");
         Date end   = new Date();
@@ -80,7 +81,7 @@ public class WarehouseController {
         map.put("list",list);
         map.put("pageNum",pageNum+1);
         map.put("pageSize",pageSize);
-        int total = this.countWarehouse(status,city);
+        int total = this.countWarehouse(status,city,shopId);
         map.put("pages",total/pageSize);
         map.put("total",total);
         result.setResults("data",map);
@@ -90,11 +91,18 @@ public class WarehouseController {
     @ApiOperation("通过状态获取有多少仓库，返回整数")
     @RequestMapping("/count-warehouse")
     public Integer countWarehouse(@ApiParam("传5则代表全部") int status,
-                                  @ApiParam("城市")String city){
+                                  @ApiParam("城市")String city,
+                                  Integer shopId){
         WarehouseExample e = new WarehouseExample();
         if(status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status)
+                    .andShopIdEqualTo(shopId)
+                    .andLocateLike("%"+city+"%");
+        }
+        if (status == 5){
+            e.createCriteria()
+                    .andShopIdEqualTo(shopId)
                     .andLocateLike("%"+city+"%");
         }
         return (int)warehouseMapper.countByExample(e);

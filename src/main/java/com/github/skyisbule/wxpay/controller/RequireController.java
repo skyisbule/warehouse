@@ -35,11 +35,18 @@ public class RequireController {
     @ApiOperation("通过订单状态以及城市名称计算总共有多少需求")
     @RequestMapping("/count-by-status")
     public int countRequire(@ApiParam("订单状态，5的话则返回全部") int status,
-                            @ApiParam("城市名称")String city){
+                            @ApiParam("城市名称")String city,
+                            Integer shopId){
         RequireExample e = new RequireExample();
         if (status>0&&status<5){
             e.createCriteria()
                     .andStatusEqualTo(status)
+                    .andShopIdEqualTo(shopId)
+                    .andLocatesLike("%"+city+"%");
+        }
+        if (status == 5){
+            e.createCriteria()
+                    .andShopIdEqualTo(shopId)
                     .andLocatesLike("%"+city+"%");
         }
         return (int)requireMapper.countByExample(e);
@@ -146,7 +153,7 @@ public class RequireController {
         map.put("list",vos);
         map.put("pageNum",pageNum+1);
         map.put("pageSize",pageSize);
-        int total = this.countRequire(status,city);
+        int total = this.countRequire(status,city,shopId);
         map.put("pages",total/pageSize);
         map.put("total",total);
         result.setResults("data",map);
