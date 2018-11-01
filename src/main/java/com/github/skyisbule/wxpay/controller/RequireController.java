@@ -172,6 +172,8 @@ public class RequireController {
         Require old = requireMapper.selectByPrimaryKey(require.getRid());
         require.setCreateTime(old.getCreateTime());
         require.setOpenId(old.getOpenId());
+        require.setShopId(old.getShopId());
+        require.setSourceRid(old.getSourceRid());
         requireMapper.updateByPrimaryKey(require);
         return "{\"errorNo\":\"0\",\"errorInfo\":\"执行成功\",\"results\":{\"data\":[]}}";
     }
@@ -204,6 +206,23 @@ public class RequireController {
         Require require = new Require();
         require = requireMapper.selectByPrimaryKey(rid);
         return userService.getByOpenId(require.getOpenId());
+    }
+
+    @ApiOperation("复制需求")
+    @RequestMapping("/doCopy")
+    public String copyRequire(String openId,int rid){
+        User user = userService.getByOpenId(openId);
+        Require require = requireMapper.selectByPrimaryKey(rid);
+        if (require == null || user == null)
+            return "null";
+        require.setOpenId(user.getOpenId());
+        require.setCreateTime(new Date());
+        require.setShopId(user.getUid());
+        require.setSourceRid(rid);
+        require.setStatus(2);
+        require.setRid(null);
+        requireMapper.insert(require);
+        return "success";
     }
 
 }

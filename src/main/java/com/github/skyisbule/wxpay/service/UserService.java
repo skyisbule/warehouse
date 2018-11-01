@@ -34,6 +34,7 @@ public class UserService {
     public void insertUser(User user){
         if (user==null || user.getOpenId()==null)
             return;
+        user.setOpenUp(0);
         mapper.insert(user);
     }
 
