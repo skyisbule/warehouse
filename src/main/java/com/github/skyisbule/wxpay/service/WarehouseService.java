@@ -41,6 +41,7 @@ public class WarehouseService {
         warehouse.setCreateTime(new Date());
         warehouse.setStatus(2);
         warehouse.setWid(null);
+        warehouse.setOpenId(user.getOpenId());
         warehouseMapper.insert(warehouse);
         int warehouseId = warehouseDao.getMaxIdFromWarehouse();
         units.forEach(u -> u.setWarehouseId(warehouseId));
