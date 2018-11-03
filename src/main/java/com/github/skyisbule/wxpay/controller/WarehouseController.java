@@ -3,11 +3,10 @@ package com.github.skyisbule.wxpay.controller;
 import com.github.skyisbule.wxpay.dao.WarehouseDao;
 import com.github.skyisbule.wxpay.dao.WarehouseMapper;
 import com.github.skyisbule.wxpay.dao.WarehouseUnitMapper;
-import com.github.skyisbule.wxpay.domain.Warehouse;
-import com.github.skyisbule.wxpay.domain.WarehouseExample;
-import com.github.skyisbule.wxpay.domain.WarehouseUnit;
-import com.github.skyisbule.wxpay.domain.WarehouseUnitExample;
+import com.github.skyisbule.wxpay.domain.*;
 import com.github.skyisbule.wxpay.result.Result;
+import com.github.skyisbule.wxpay.service.UserService;
+import com.github.skyisbule.wxpay.service.WarehouseService;
 import com.github.skyisbule.wxpay.vo.WarehouseWithUnitVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -33,6 +32,10 @@ public class WarehouseController {
     WarehouseUnitMapper warehouseUnitMapper;
     @Autowired
     WarehouseDao warehouseDao;
+    @Autowired
+    UserService userService;
+    @Autowired
+    WarehouseService warehouseService;
 
     @ApiOperation("通过页码获取仓库信息，但不返回里边的存储单元,page从0开始传")
     @RequestMapping("/get-warehouse-simple-by-page")
@@ -225,5 +228,12 @@ public class WarehouseController {
         }
         return "success";
     }
+
+    @ApiOperation("复制仓库")
+    @RequestMapping("/doCopy")
+    public synchronized String doCopy(String openId,int wid) {
+        return warehouseService.doCopy(openId,wid);
+    }
+
 
 }
