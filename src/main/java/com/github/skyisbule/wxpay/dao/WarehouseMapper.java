@@ -3,9 +3,17 @@ package com.github.skyisbule.wxpay.dao;
 import com.github.skyisbule.wxpay.domain.Warehouse;
 import com.github.skyisbule.wxpay.domain.WarehouseExample;
 import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Update;
+
+@Mapper
 public interface WarehouseMapper {
+
+    @Update("update db_warehouse set shop_id = ${target} where shop_id = ${source}")
+    int doChangeShopId(@Param("source")int source,@Param("target")int target);
+
     long countByExample(WarehouseExample example);
 
     int deleteByExample(WarehouseExample example);
