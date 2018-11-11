@@ -1,7 +1,7 @@
 package com.github.skyisbule.wxpay.domain;
 
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * db_message
@@ -14,7 +14,7 @@ public class Message implements Serializable {
 
     private String content;
 
-    private LocalDate createDate;
+    private Date createDate;
 
     /**
      * 0-系统 1-个人
@@ -56,11 +56,11 @@ public class Message implements Serializable {
         this.content = content;
     }
 
-    public LocalDate getCreateDate() {
+    public Date getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(LocalDate createDate) {
+    public void setCreateDate(Date createDate) {
         this.createDate = createDate;
     }
 
