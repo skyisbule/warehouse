@@ -107,35 +107,40 @@ public class MessageExample {
 
         protected void addCriterion(String condition) {
             if (condition == null) {
-                throw new RuntimeException("Value for condition cannot be null");
+                //throw new RuntimeException("Value for condition cannot be null");
+                return;
             }
             criteria.add(new Criterion(condition));
         }
 
         protected void addCriterion(String condition, Object value, String property) {
             if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
+                //throw new RuntimeException("Value for " + property + " cannot be null");
+                return;
             }
             criteria.add(new Criterion(condition, value));
         }
 
         protected void addCriterion(String condition, Object value1, Object value2, String property) {
             if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
+                //throw new RuntimeException("Between values for " + property + " cannot be null");
+                return;
             }
             criteria.add(new Criterion(condition, value1, value2));
         }
 
         protected void addCriterionForJDBCDate(String condition, Date value, String property) {
             if (value == null) {
-                throw new RuntimeException("Value for " + property + " cannot be null");
+                //throw new RuntimeException("Value for " + property + " cannot be null");
+                return;
             }
             addCriterion(condition, new java.sql.Date(value.getTime()), property);
         }
 
         protected void addCriterionForJDBCDate(String condition, List<Date> values, String property) {
             if (values == null || values.size() == 0) {
-                throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+                //throw new RuntimeException("Value list for " + property + " cannot be null or empty");
+                return;
             }
             List<java.sql.Date> dateList = new ArrayList<java.sql.Date>();
             Iterator<Date> iter = values.iterator();
@@ -147,7 +152,8 @@ public class MessageExample {
 
         protected void addCriterionForJDBCDate(String condition, Date value1, Date value2, String property) {
             if (value1 == null || value2 == null) {
-                throw new RuntimeException("Between values for " + property + " cannot be null");
+                //throw new RuntimeException("Between values for " + property + " cannot be null");
+                return;
             }
             addCriterion(condition, new java.sql.Date(value1.getTime()), new java.sql.Date(value2.getTime()), property);
         }
@@ -253,7 +259,9 @@ public class MessageExample {
         }
 
         public Criteria andTitleLike(String value) {
-            addCriterion("title like", value, "title");
+            if (!value.equals("%null%")) {
+                addCriterion("title like", value, "title");
+            }
             return (Criteria) this;
         }
 
@@ -323,7 +331,8 @@ public class MessageExample {
         }
 
         public Criteria andContentLike(String value) {
-            addCriterion("content like", value, "content");
+            if (!value.equals("%null%"))
+                addCriterion("content like", value, "content");
             return (Criteria) this;
         }
 
@@ -643,7 +652,8 @@ public class MessageExample {
         }
 
         public Criteria andLocateLike(String value) {
-            addCriterion("locate like", value, "locate");
+            if (!value.equals("%null%"))
+                addCriterion("locate like", value, "locate");
             return (Criteria) this;
         }
 

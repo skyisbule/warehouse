@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta content="text/html;charset=UTF-8"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/black/pace-theme-flash.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="/table/plugins/layui/css/layui.css" media="all"/>
+    <link rel="stylesheet" type="text/css" href="/table/css/fs.css" media="all"/>
+    <script type="text/javascript" src="/table/plugins/layui/layui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/table/plugins/frame/js/fsDict.js?v=1.7.0"></script>
+    <script type="text/javascript" src="/table/plugins/frame/js/fs.js?v=1.7.0"></script>
+    <script type="text/javascript" src="/table/plugins/frame/js/frame.js?v=1.7.0"></script>
+</head>
+
+<form class="layui-form" id="query_form">
+    <div class="layui-form-item">
+        <div class="layui-inline">
+            <label class="layui-form-mid">状态：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="tel" name="superStatus" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">位置：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="tel" name="city" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">面积：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="areas" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">用途：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="purpose" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">价格：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="price" placeholder="￥" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">需求时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="requireTime" autocomplete="off" class="layui-input fsDate" daterange="1"
+                       placeholder=" - " lay-key="1">
+            </div>
+        </div>
+        <div class="layui-inline">
+            <label class="layui-form-mid">创建时间：</label>
+            <div class="layui-input-inline" style="width: 100px;">
+                <input type="text" name="createTime" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+    </div>
+    <div class="layui-inline">
+        <div class="layui-input-inline">
+            <button class="layui-btn" type="button" function="query"><i class="layui-icon">&#xe615;</i>查询</button>
+        </div>
+    </div>
+    </div>
+</form>
+
+<table id="fsDatagrid" lay-filter="fsDatagrid" class="fsDatagrid" isLoad="1" url="/api/require/get-by-page?status=5"
+       isPage="1" sortType="1" pageSize="10" defaultForm="query_form" height="full-135"></table>
+
+<div class="fsDatagridCols">
+    <p type="numbers" title="#"/>
+    <p checkbox="true"/>
+    <p field="rid" title="ID" width="60" sort="true"/>
+    <p field="status" title="状态" width="60"/>
+    <p field="locates" title="位置" width="190"/>
+    <p field="area" title="面积" width="80"/>
+    <p field="purpose" title="用途" width="180"/>
+    <p field="fireControlRequire" title="消防需求" width="100"/>
+    <p field="platformRequire" title="月台需求" width="100"/>
+    <p field="floorRequire" title="楼层要求" width="100"/>
+    <p field="requireTime" title="需求时间" width="150"/>
+    <p field="leaseTerm" title="租期" width="80"/>
+    <p field="maxPrice" title="最高价格(单位为分)" width="170"/>
+    <p field="createTime" title="提交时间" width="150"/>
+    <p field="remark" title="备注" width="180"/>
+    <p field="openId" title="openId" width="60"/>
+    <p fixed="right" align="center" toolbar="#barDemo" title="操作" width="220"/>
+</div>
+
+<script type="text/html" id="barDemo">
+
+    <a class="layui-btn layui-btn-xs" lay-event="top" topUrl="/admin_require_detail" topWidth="800px" topHeight="600px"
+       topTitle="编辑页面" inputs="id:,openId:">编辑</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="submit" url="/api/require/pass?pass=1" isConfirm="1"
+       confirmMsg="是否确定通过当前记录？它将被展示到前台" inputs="rid:">通过</a>
+    <a class="layui-btn layui-btn-danger layui-btn-xs" lay-event="submit" url="/api/require/pass?pass=2" isConfirm="1"
+       confirmMsg="确定拒绝通过当前记录？它将不被展示到前台" inputs="rid:">不通过</a>
+    <a class="layui-btn layui-btn-xs" lay-event="top" topUrl="/admin_communication_record" topWidth="800px"
+       topHeight="600px" topTitle="沟通页面" inputs="rid:">沟通</a>
+</script>
+
+</body>
+</html>

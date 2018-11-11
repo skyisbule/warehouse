@@ -1,5 +1,7 @@
 package com.github.skyisbule.wxpay.domain;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -14,6 +16,7 @@ public class Message implements Serializable {
 
     private String content;
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date createDate;
 
     /**
