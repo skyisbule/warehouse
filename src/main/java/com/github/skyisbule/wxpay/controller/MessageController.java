@@ -40,8 +40,15 @@ public class MessageController {
     @ApiOperation("添加消息")
     @RequestMapping("/add")
     public String add(Message message){
+        message.setCreateDate(new Date());
         messageDAO.insert(message);
         return "success";
+    }
+
+    @ApiOperation("通过mid获取详情信息")
+    @RequestMapping("/get-by-mid")
+    public Message getByMid(int mid){
+        return messageDAO.selectByPrimaryKey(mid);
     }
 
     @ApiOperation("根据状态页码等参数返回详细的需求数组，注其他4个参数选填，不填则不过滤")

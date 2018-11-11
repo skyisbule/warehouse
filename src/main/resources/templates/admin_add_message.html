@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>发布消息</title>
+    <style type="text/css">
+        .body {
+            width: 800px;
+            margin: 0 auto 0 auto;
+        }
+        .head {
+            margin:0 auto; width:400px; height:150px;
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.0/jquery.min.js"></script>
+</head>
+<body>
+<div class = "head">
+    <p>标题：   <input id="title" /></p>
+    <p>地点：   <input id="locate" /></p>
+    <p>openId：<input id="openId" /></p>
+    <select id = "fromType">
+        <option value="0">系统</option>
+        <option value="1">个人</option>
+    </select>
+    <select id = "classType">
+        <option value="0">公告</option>
+        <option value="1">供应</option>
+        <option value="2">需求</option>
+    </select>
+
+    <button id = 'sbtbutton' onclick="submit()" sourceId="" type="">保存</button>
+</div>
+<div id="body" class='body'>
+
+</div>
+
+
+
+<!-- 引用js -->
+<script type="text/javascript" src="https://unpkg.com/wangeditor/release/wangEditor.min.js"></script>
+<script type="text/javascript">
+    let E = window.wangEditor;
+    var editor = new E('#body');
+    editor.create();
+
+    function submit() {
+        let html       = $(".w-e-text").text();
+        let title      = $("#title").val();
+        let locate     = $("#locate").val();
+        let openId     = $("#openId").val();
+        let fromType   = $("#fromType").val();
+        let classType  = $("#classType").val();
+        $.post("/api/message/add",{
+            title     : title,
+            fromType  : fromType,
+            content   : html,
+            classType : classType
+        },(result)=>{
+            alert("success")
+    });
+
+    }
+
+</script>
+</body>
+</html>

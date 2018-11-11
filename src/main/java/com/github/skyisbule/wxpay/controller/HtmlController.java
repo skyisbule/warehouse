@@ -36,6 +36,9 @@ public class HtmlController {
     @RequestMapping("/admin_message")
     public String admin_message(){return "admin_message";}
 
+    @RequestMapping("/admin_add_message")
+    public String admin_add_message(){return "admin_add_message";}
+
     @RequestMapping("/index")
     public String index(){return "index";}
 
